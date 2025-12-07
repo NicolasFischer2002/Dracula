@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Source/" />
+  <Folder Name="/Source/Order/">
+    <Project Path="Source/Order/Api/Api.csproj">
+      <BuildDependency Project="Source/Order/Application/Application.csproj" />
+    </Project>
+    <Project Path="Source/Order/Application/Application.csproj">
+      <BuildDependency Project="Source/Order/Domain/Domain.csproj" />
+    </Project>
+    <Project Path="Source/Order/Domain/Domain.csproj" />
+    <Project Path="Source/Order/Infrastructure/Infrastructure.csproj">
+      <BuildDependency Project="Source/Order/Application/Application.csproj" />
+    </Project>
+  </Folder>
+</Solution>
