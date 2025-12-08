@@ -11,5 +11,6 @@
     <Project Path="Source/Order/Infrastructure/Infrastructure.csproj">
       <BuildDependency Project="Source/Order/Application/Application.csproj" />
     </Project>
+    <Project Path="Source/Order/Tests/Tests.csproj" Id="5c38eec4-fe79-450a-acb6-e479b9959103" />
   </Folder>
 </Solution>
