@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Application.csproj",
-      "projectName": "Application",
-      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Order.Application.csproj",
+      "projectName": "Order.Application",
+      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Order.Application.csproj",
       "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
       "outputPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\obj\\",
       "projectStyle": "PackageReference",

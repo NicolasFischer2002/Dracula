@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1F23B728-80A6-93FC-EFD9-0D3CA9855DCB}|Source\\Order\\Domain\\Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F23B728-80A6-93FC-EFD9-0D3CA9855DCB}|Source\\Order\\Domain\\Domain.csproj|solutionrelative:source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +14,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "Source\\Order\\Domain\\Entities\\Order.cs",
+              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
+              "RelativeToolTip": "Source\\Order\\Domain\\Entities\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T23:32:44.153Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"

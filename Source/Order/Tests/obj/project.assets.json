@@ -2281,9 +2281,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Tests\\Tests.csproj",
-      "projectName": "Tests",
-      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Tests\\Tests.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Tests\\Order.Tests.csproj",
+      "projectName": "Order.Tests",
+      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Tests\\Order.Tests.csproj",
       "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
       "outputPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Tests\\obj\\",
       "projectStyle": "PackageReference",
