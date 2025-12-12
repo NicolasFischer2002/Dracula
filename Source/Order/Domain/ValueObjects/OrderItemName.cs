@@ -1,4 +1,4 @@
-﻿namespace Order.Domain.ValueObjects
+﻿namespace Ordering.Domain.ValueObjects
 {
     public sealed record OrderItemName
     {

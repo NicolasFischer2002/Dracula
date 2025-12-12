@@ -33,9 +33,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Order.Domain.csproj",
-      "projectName": "Order.Domain",
-      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Order.Domain.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Ordering.Domain.csproj",
+      "projectName": "Ordering.Domain",
+      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Ordering.Domain.csproj",
       "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
       "outputPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\obj\\",
       "projectStyle": "PackageReference",

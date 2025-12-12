@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "Ordering.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "SharedKernel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ordering.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ordering.Domain.dll": {}
+        }
+      },
+      "SharedKernel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/SharedKernel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharedKernel.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Ordering.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Ordering.Domain.csproj",
+      "msbuildProject": "../Domain/Ordering.Domain.csproj"
+    },
+    "SharedKernel/1.0.0": {
+      "type": "project",
+      "path": "../../SharedKernel/SharedKernel.csproj",
+      "msbuildProject": "../../SharedKernel/SharedKernel.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "Ordering.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\nicol\\.nuget\\packages\\": {},
@@ -14,9 +51,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Order.Application.csproj",
-      "projectName": "Order.Application",
-      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Order.Application.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Ordering.Application.csproj",
+      "projectName": "Ordering.Application",
+      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Ordering.Application.csproj",
       "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
       "outputPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\obj\\",
       "projectStyle": "PackageReference",
@@ -38,7 +75,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Ordering.Domain.csproj": {
+              "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Ordering.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

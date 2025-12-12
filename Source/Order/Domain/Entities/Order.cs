@@ -1,16 +1,19 @@
-﻿namespace Order.Domain.Entities
+﻿using Ordering.Domain.ValueObjects;
+
+namespace Ordering.Domain.Entities
 {
-    // Berlim => Antes de continuar, criar uma Factory para Order.
     public class Order
     {
         public Guid Id { get; init; }
+        public Identifier Identifier { get; init; }
         public DateTime CreatedAt { get; init; }
         private List<OrderItem> _items { get; init; }
         public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
 
-        public Order(DateTime createdAt, List<OrderItem> items)
+        internal Order(Guid id, Identifier identifier, DateTime createdAt, List<OrderItem> items)
         {
-            Id = Guid.NewGuid();
+            Id = id;
+            Identifier = identifier;
             CreatedAt = createdAt;
             _items = items;
         }

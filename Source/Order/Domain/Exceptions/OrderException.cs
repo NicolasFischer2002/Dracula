@@ -1,6 +1,6 @@
 ﻿using SharedKernel.Exceptions;
 
-namespace Order.Domain.Exceptions
+namespace Ordering.Domain.Exceptions
 {
     public class OrderException : CustomException<string>
     {

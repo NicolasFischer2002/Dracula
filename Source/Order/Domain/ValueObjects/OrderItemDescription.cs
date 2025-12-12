@@ -1,6 +1,6 @@
-﻿using Order.Domain.Exceptions;
+﻿using Ordering.Domain.Exceptions;
 
-namespace Order.Domain.ValueObjects
+namespace Ordering.Domain.ValueObjects
 {
     public sealed record OrderItemDescription
     {

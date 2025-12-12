@@ -89,9 +89,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Api\\Order.Api.csproj",
-      "projectName": "Order.Api",
-      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Api\\Order.Api.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Api\\Ordering.Api.csproj",
+      "projectName": "Ordering.Api",
+      "projectPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Api\\Ordering.Api.csproj",
       "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
       "outputPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Api\\obj\\",
       "projectStyle": "PackageReference",

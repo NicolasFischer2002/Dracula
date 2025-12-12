@@ -1,6 +1,6 @@
-﻿using Order.Domain.ValueObjects;
+﻿using Ordering.Domain.ValueObjects;
 
-namespace Order.Domain.Entities
+namespace Ordering.Domain.Entities
 {
     public class OrderItem
     {     
