@@ -23,7 +23,7 @@ namespace Ordering.Application.Factories.Implementations
                     new GrossOrderItemValue(itemRequest.GrossValue),
                     new OrderItemDiscount(itemRequest.GrossValue, itemRequest.Discount),
                     new CookingInstructions(itemRequest.CookingInstructions),
-                    DateTime.UtcNow,
+                    new OrderItemTimeline(DateTime.UtcNow),
                     OrderItemStatus.Waiting
                 )).ToList(),
                 OrderStatus.Open

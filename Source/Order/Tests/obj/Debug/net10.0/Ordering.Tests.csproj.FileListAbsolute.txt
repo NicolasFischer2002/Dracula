@@ -267,3 +267,9 @@ C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\obj\Debug\net10.0\refi
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\obj\Debug\net10.0\Ordering.Tests.pdb
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\obj\Debug\net10.0\Ordering.Tests.genruntimeconfig.cache
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\obj\Debug\net10.0\ref\Ordering.Tests.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\.msCoverageExtensionSourceRootsMapping_Ordering.Tests
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_Ordering.Tests
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\Ordering.Domain.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\SharedKernel.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\Ordering.Domain.pdb
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Tests\bin\Debug\net10.0\SharedKernel.pdb

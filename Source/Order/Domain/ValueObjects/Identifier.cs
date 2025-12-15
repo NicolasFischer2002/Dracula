@@ -11,8 +11,7 @@ namespace Ordering.Domain.ValueObjects
 
         public Identifier(string id)
         {
-            Id = id;
-
+            Id = id is not null ? id.Trim() : string.Empty;
             ValidateIdentifier();
         }
 

@@ -11,13 +11,13 @@ namespace Ordering.Domain.Entities
         public GrossOrderItemValue GrossOrderItemValue { get; init; }
         public OrderItemDiscount Discount { get; init; }
         public CookingInstructions CookingInstructions { get; init; }
-        public DateTime DateItWasAdded { get; init; }
+        public OrderItemTimeline OrderItemTimeline { get; init; }
         public OrderItemStatus Status { get; private set; }
         public decimal NetOrderItemValue => GrossOrderItemValue.Value - Discount.Value;
 
         internal OrderItem(Guid id, Guid waiterId, OrderItemName name, GrossOrderItemValue grossOrderItemValue, 
-            OrderItemDiscount discount, CookingInstructions cookingInstructions, DateTime dateItWasAdded,
-            OrderItemStatus status)
+            OrderItemDiscount discount, CookingInstructions cookingInstructions, 
+            OrderItemTimeline orderItemTimeline, OrderItemStatus status)
         {
             Id = id;
             WaiterId = waiterId;
@@ -25,7 +25,7 @@ namespace Ordering.Domain.Entities
             GrossOrderItemValue = grossOrderItemValue;
             Discount = discount;
             CookingInstructions = cookingInstructions;
-            DateItWasAdded = dateItWasAdded;
+            OrderItemTimeline = orderItemTimeline;
             Status = status;
         }
 
