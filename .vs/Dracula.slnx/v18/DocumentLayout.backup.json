@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\application\\factories\\iorderfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|solutionrelative:source\\order\\application\\factories\\iorderfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\application\\factories\\implementations\\orderfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|solutionrelative:source\\order\\application\\factories\\implementations\\orderfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\application\\commands\\placeorder\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1121317-7BCC-AEFF-A5DC-9651FFED8E60}|Source\\Order\\Application\\Ordering.Application.csproj|solutionrelative:source\\order\\application\\commands\\placeorder\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,17 +22,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
               "RelativeDocumentMoniker": "Source\\Order\\Domain\\Entities\\Order.cs",
               "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
               "RelativeToolTip": "Source\\Order\\Domain\\Entities\\Order.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-08T23:32:44.153Z",
               "IsPinned": true,
@@ -48,57 +40,30 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IOrderFactory.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\IOrderFactory.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Application\\Factories\\IOrderFactory.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\IOrderFactory.cs",
-              "RelativeToolTip": "Source\\Order\\Application\\Factories\\IOrderFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T23:29:36.661Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OrderFactory.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
-              "RelativeToolTip": "Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T00:19:04.167Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateOrderRequest.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Commands\\PlaceOrder\\CreateOrderRequest.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Application\\Commands\\PlaceOrder\\CreateOrderRequest.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Commands\\PlaceOrder\\CreateOrderRequest.cs",
-              "RelativeToolTip": "Source\\Order\\Application\\Commands\\PlaceOrder\\CreateOrderRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T23:40:52.939Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "OrderItem.cs",
               "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\OrderItem.cs",
               "RelativeDocumentMoniker": "Source\\Order\\Domain\\Entities\\OrderItem.cs",
               "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\OrderItem.cs",
               "RelativeToolTip": "Source\\Order\\Domain\\Entities\\OrderItem.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA9wAkAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T00:25:08.904Z",
+              "WhenOpened": "2025-12-15T01:30:00.605Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderFactory.cs",
+              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
+              "RelativeDocumentMoniker": "Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
+              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
+              "RelativeToolTip": "Source\\Order\\Application\\Factories\\Implementations\\OrderFactory.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T02:23:04.591Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {

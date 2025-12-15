@@ -1,27 +1,37 @@
-﻿using Ordering.Domain.ValueObjects;
+﻿using Ordering.Domain.Enums;
+using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Domain.Entities
 {
     public class OrderItem
     {     
         public Guid Id { get; init; }
-        private OrderItemName Name { get; init; }
-        private GrossOrderItemValue GrossOrderItemValue { get; init; }
-        private OrderItemDiscount Discount { get; init; }
-        private OrderItemDescription Description { get; init; }
-        private DateTime DateItWasAdded { get; init; }
+        public Guid WaiterId { get; init; }
+        public OrderItemName Name { get; init; }
+        public GrossOrderItemValue GrossOrderItemValue { get; init; }
+        public OrderItemDiscount Discount { get; init; }
+        public CookingInstructions CookingInstructions { get; init; }
+        public DateTime DateItWasAdded { get; init; }
+        public OrderItemStatus Status { get; private set; }
+        public decimal NetOrderItemValue => GrossOrderItemValue.Value - Discount.Value;
 
-        public OrderItem(Guid id, OrderItemName name, GrossOrderItemValue grossOrderItemValue, 
-            OrderItemDiscount discount, OrderItemDescription description, DateTime dateItWasAdded)
+        internal OrderItem(Guid id, Guid waiterId, OrderItemName name, GrossOrderItemValue grossOrderItemValue, 
+            OrderItemDiscount discount, CookingInstructions cookingInstructions, DateTime dateItWasAdded,
+            OrderItemStatus status)
         {
             Id = id;
+            WaiterId = waiterId;
             Name = name;
             GrossOrderItemValue = grossOrderItemValue;
             Discount = discount;
-            Description = description;
+            CookingInstructions = cookingInstructions;
             DateItWasAdded = dateItWasAdded;
+            Status = status;
         }
 
-        public decimal NetOrderItemValue => GrossOrderItemValue.Value - Discount.Value;
+        public void UpdateStatus(OrderItemStatus newStatus)
+        {
+            Status = newStatus;
+        }
     }
 }
