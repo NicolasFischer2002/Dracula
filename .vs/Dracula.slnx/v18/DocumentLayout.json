@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\valueobjects\\identifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\valueobjects\\identifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93109E8B-859D-BE54-0F1A-19AFAA2E41E4}|Source\\Order\\Domain\\Ordering.Domain.csproj|solutionrelative:source\\order\\domain\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6691E0D4-4D82-1DE0-DA71-79C4011B9445}|Source\\Ordering\\Tests\\Ordering.Tests.csproj|c:\\desenvolvimento\\github\\.net\\dracula\\source\\ordering\\tests\\domain\\valueobjects\\identifierunittests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6691E0D4-4D82-1DE0-DA71-79C4011B9445}|Source\\Ordering\\Tests\\Ordering.Tests.csproj|solutionrelative:source\\ordering\\tests\\domain\\valueobjects\\identifierunittests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,53 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Domain\\Entities\\Order.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\Order.cs",
-              "RelativeToolTip": "Source\\Order\\Domain\\Entities\\Order.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T23:32:44.153Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderItem.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\OrderItem.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Domain\\Entities\\OrderItem.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\Entities\\OrderItem.cs",
-              "RelativeToolTip": "Source\\Order\\Domain\\Entities\\OrderItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T01:30:00.605Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Identifier.cs",
-              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\ValueObjects\\Identifier.cs",
-              "RelativeDocumentMoniker": "Source\\Order\\Domain\\ValueObjects\\Identifier.cs",
-              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Order\\Domain\\ValueObjects\\Identifier.cs",
-              "RelativeToolTip": "Source\\Order\\Domain\\ValueObjects\\Identifier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABVAAAAAAAAAA==",
+              "Title": "IdentifierUnitTests.cs",
+              "DocumentMoniker": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Ordering\\Tests\\Domain\\ValueObjects\\IdentifierUnitTests.cs",
+              "RelativeDocumentMoniker": "Source\\Ordering\\Tests\\Domain\\ValueObjects\\IdentifierUnitTests.cs",
+              "ToolTip": "C:\\Desenvolvimento\\GitHub\\.NET\\Dracula\\Source\\Ordering\\Tests\\Domain\\ValueObjects\\IdentifierUnitTests.cs",
+              "RelativeToolTip": "Source\\Ordering\\Tests\\Domain\\ValueObjects\\IdentifierUnitTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T18:15:38.433Z",
-              "IsPinned": true,
+              "WhenOpened": "2025-12-17T00:35:25.451Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
             }
           ]
         }

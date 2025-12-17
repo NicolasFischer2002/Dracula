@@ -1,17 +1,11 @@
 <Solution>
   <Folder Name="/Source/" />
   <Folder Name="/Source/Ordering/">
-    <Project Path="Source/Order/Api/Ordering.Api.csproj">
-      <BuildDependency Project="Source/Order/Application/Ordering.Application.csproj" />
-    </Project>
-    <Project Path="Source/Order/Application/Ordering.Application.csproj">
-      <BuildDependency Project="Source/Order/Domain/Ordering.Domain.csproj" />
-    </Project>
-    <Project Path="Source/Order/Domain/Ordering.Domain.csproj" />
-    <Project Path="Source/Order/Infrastructure/Ordering.Infrastructure.csproj">
-      <BuildDependency Project="Source/Order/Application/Ordering.Application.csproj" />
-    </Project>
-    <Project Path="Source/Order/Tests/Ordering.Tests.csproj" Id="5c38eec4-fe79-450a-acb6-e479b9959103" />
+    <Project Path="Source/Ordering/Api/Ordering.Api.csproj" />
+    <Project Path="Source/Ordering/Application/Ordering.Application.csproj" />
+    <Project Path="Source/Ordering/Domain/Ordering.Domain.csproj" />
+    <Project Path="Source/Ordering/Infrastructure/Ordering.Infrastructure.csproj" />
+    <Project Path="Source/Ordering/Tests/Ordering.Tests.csproj" />
   </Folder>
   <Folder Name="/Source/SharedKernel/">
     <Project Path="Source/SharedKernel/SharedKernel.csproj" />
