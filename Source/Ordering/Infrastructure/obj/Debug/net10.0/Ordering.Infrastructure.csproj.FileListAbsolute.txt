@@ -10,3 +10,15 @@ C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Infrastructure\obj\Debug\net
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Infrastructure\obj\Debug\net10.0\refint\Ordering.Infrastructure.dll
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.pdb
 C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Order\Infrastructure\obj\Debug\net10.0\ref\Ordering.Infrastructure.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\bin\Debug\net10.0\Ordering.Infrastructure.deps.json
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\bin\Debug\net10.0\Ordering.Infrastructure.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\bin\Debug\net10.0\Ordering.Infrastructure.pdb
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.AssemblyInfoInputs.cache
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.AssemblyInfo.cs
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.sourcelink.json
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\refint\Ordering.Infrastructure.dll
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\Ordering.Infrastructure.pdb
+C:\Desenvolvimento\GitHub\.NET\Dracula\Source\Ordering\Infrastructure\obj\Debug\net10.0\ref\Ordering.Infrastructure.dll
