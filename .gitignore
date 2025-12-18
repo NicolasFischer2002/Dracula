@@ -1,0 +1,33 @@
+# Build folders
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+.vs/**/DesignTimeBuild/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDEs
+.vscode/
+.idea/
+
+# NuGet & packages
+*.nupkg
+packages/
+.nuget/
+
+# Test results
+TestResults/
+*.trx
+
+# Logs, caches, pdbs
+*.log
+*.cache
+*.pdb
+
+# Misc
+*.db
+*.bak
