@@ -1,4 +1,5 @@
 ﻿using Ordering.Domain.Exceptions;
+using SharedKernel.Formatters;
 
 namespace Ordering.Domain.ValueObjects
 {
@@ -11,7 +12,7 @@ namespace Ordering.Domain.ValueObjects
 
         public Identifier(string id)
         {
-            Id = id is not null ? id.Trim() : string.Empty;
+            Id = StringNormalizer.Normalize(id);
             ValidateIdentifier();
         }
 
