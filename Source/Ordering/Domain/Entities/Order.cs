@@ -17,12 +17,17 @@ namespace Ordering.Domain.Entities
         public decimal TotalOrderValue => TotalValueOfAllItemsInTheOrder - OrderDiscountAmount;
 
         internal Order(Guid id, Identifier identifier, OrderTimeline timeLine, 
-            List<OrderItem> items, OrderStatus status)
+            IEnumerable<OrderItem> items, OrderStatus status)
         {
             Id = id;
             Identifier = identifier;
             TimeLine = timeLine;
-            _items = items;
+
+            _items = items is null ? throw new OrderException(
+                "A lista de itens do pedido não pode ser nula.",
+                string.Empty
+            ) : new List<OrderItem>(items);
+
             Status = status;
         }
 

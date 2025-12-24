@@ -15,7 +15,7 @@
             IsPrimary = isPrimary;
         }
 
-        internal void MarkAsPrimary() => IsPrimary = true;
-        internal void UnmarkAsPrimary() => IsPrimary = false;
+        public void MarkAsPrimary() => IsPrimary = true;
+        public void UnmarkAsPrimary() => IsPrimary = false;
     }
 }
