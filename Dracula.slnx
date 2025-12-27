@@ -1,5 +1,12 @@
 <Solution>
   <Folder Name="/Source/" />
+  <Folder Name="/Source/Menu/">
+    <Project Path="Source/Menu/Menu.Api/Menu.Api.csproj" Id="b50cc833-c34d-4f4f-aedc-cd32523f20d0" />
+    <Project Path="Source/Menu/Menu.Application/Menu.Application.csproj" Id="e804a827-64dc-4666-a6a1-7905d46db154" />
+    <Project Path="Source/Menu/Menu.Domain/Menu.Domain.csproj" Id="00f1fc56-7948-47f1-82ee-ec06c86c4835" />
+    <Project Path="Source/Menu/Menu.Infrastructure/Menu.Infrastructure.csproj" Id="46e66822-ba67-42a3-9b74-6806ef6eb477" />
+    <Project Path="Source/Menu/Menu.Tests/Menu.Tests.csproj" Id="6747f4d8-b12c-4292-ae64-bd4593737040" />
+  </Folder>
   <Folder Name="/Source/Ordering/">
     <Project Path="Source/Ordering/Api/Ordering.Api.csproj" />
     <Project Path="Source/Ordering/Application/Ordering.Application.csproj" />

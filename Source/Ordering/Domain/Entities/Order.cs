@@ -1,6 +1,8 @@
-﻿using Ordering.Domain.Enums;
+﻿using Ordering.Domain.EntityComposition;
+using Ordering.Domain.Enums;
 using Ordering.Domain.Exceptions;
 using Ordering.Domain.ValueObjects;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Domain.Entities
 {
@@ -17,25 +19,30 @@ namespace Ordering.Domain.Entities
         public decimal TotalOrderValue => TotalValueOfAllItemsInTheOrder - OrderDiscountAmount;
 
         internal Order(Guid id, Identifier identifier, OrderTimeline timeLine, 
-            List<OrderItem> items, OrderStatus status)
+            IEnumerable<OrderItem> items, OrderStatus status)
         {
             Id = id;
             Identifier = identifier;
             TimeLine = timeLine;
-            _items = items;
+
+            _items = items is null ? throw new OrderException(
+                "A lista de itens do pedido não pode ser nula.",
+                string.Empty
+            ) : new List<OrderItem>(items);
+
             Status = status;
         }
 
         public void AddItemToOrder(OrderItem item)
         {
             _items.Add(item);
-            TimeLine.AddEvent(DateTime.UtcNow, ActionTimelineOfTheOrder.ItemAdded);
+            TimeLine.AddEvent(new UtcInstant(DateTime.UtcNow), ActionTimelineOfTheOrder.ItemAdded);
         }
 
         public void RemoveItemFromOrder(Guid orderItemId)
         {
             _items.RemoveAll(item => item.Id == orderItemId);
-            TimeLine.AddEvent(DateTime.UtcNow, ActionTimelineOfTheOrder.ItemRemoved);
+            TimeLine.AddEvent(new UtcInstant(DateTime.UtcNow), ActionTimelineOfTheOrder.ItemRemoved);
         }
 
         public void AddDiscountToOrder(decimal discount)
@@ -63,7 +70,7 @@ namespace Ordering.Domain.Entities
 
         public void CloseOrder()
         {
-            TimeLine.AddEvent(DateTime.UtcNow, ActionTimelineOfTheOrder.OrderCompleted);
+            TimeLine.AddEvent(new UtcInstant(DateTime.UtcNow), ActionTimelineOfTheOrder.OrderCompleted);
             Status = OrderStatus.Completed;
         }
 
