@@ -5,7 +5,6 @@ using Menu.Domain.ValueObjects;
 namespace Menu.Domain.Entities
 {
     // Berlim => Continuar daqui:
-    // Avaliar os objetos de valor: nem todos devem ser records, alguns podem ser classes normais.
     // Provavelmente será necessário criar um objeto para encapsular as regras de Categories e _ingredients
     public sealed class MenuItem
     {

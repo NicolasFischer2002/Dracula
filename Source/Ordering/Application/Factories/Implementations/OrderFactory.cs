@@ -1,7 +1,9 @@
 ﻿using Ordering.Application.Commands.PlaceOrder;
 using Ordering.Domain.Entities;
+using Ordering.Domain.EntityComposition;
 using Ordering.Domain.Enums;
 using Ordering.Domain.ValueObjects;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Application.Factories.Implementations
 {
@@ -15,7 +17,7 @@ namespace Ordering.Application.Factories.Implementations
             return new Order(
                 Guid.NewGuid(),
                 new Identifier(orderRequest.Identifier),
-                new OrderTimeline(DateTime.UtcNow),
+                new OrderTimeline(new UtcInstant(DateTime.UtcNow)),
                 requestForOrderItems.Select(itemRequest => new OrderItem(
                     Guid.NewGuid(),
                     itemRequest.WaiterId,
@@ -23,7 +25,7 @@ namespace Ordering.Application.Factories.Implementations
                     new GrossOrderItemValue(itemRequest.GrossValue),
                     new OrderItemDiscount(itemRequest.GrossValue, itemRequest.Discount),
                     new CookingInstructions(itemRequest.CookingInstructions),
-                    new OrderItemTimeline(DateTime.UtcNow),
+                    new OrderItemTimeline(new UtcInstant(DateTime.UtcNow)),
                     OrderItemStatus.Waiting
                 )).ToList(),
                 OrderStatus.Open
