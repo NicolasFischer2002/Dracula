@@ -1,7 +1,7 @@
 ﻿using Menu.Domain.Entities;
 using Menu.Domain.Exceptions;
 
-namespace Menu.Domain.ValueObjects
+namespace Menu.Domain.EntityComposition
 {
     public sealed class MenuItemImages
     {
