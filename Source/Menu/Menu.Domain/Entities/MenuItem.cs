@@ -17,7 +17,7 @@ namespace Menu.Domain.Entities
         public bool ItemIsActive { get; private set; }
 
         public MenuItem(Guid id, IEnumerable<Category> categories, IEnumerable<MenuItemImage> itemImages, 
-            ItemName name, Price price, IEnumerable<Ingredient> ingredients, 
+            ItemName name, Price price, IEnumerable<MenuItemIngredient> ingredients, 
             PreparationTimeInMinutes? preparationTimeInMinutes, bool optionalItem, bool itemIsActive)
         {
             Id = id;
