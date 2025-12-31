@@ -5,17 +5,15 @@ namespace Ordering.Domain.ValueObjects
     public sealed record OrderItemDiscount
     {
         public decimal Value { get; init; }
-        private decimal OrderItemValue { get; init; }
 
         public OrderItemDiscount(decimal value, decimal orderItemValue)
         {
             Value = value;
-            OrderItemValue = orderItemValue;
 
-            ValidateDiscount();
+            ValidateDiscount(orderItemValue);
         }
 
-        private void ValidateDiscount()
+        private void ValidateDiscount(decimal orderItemValue)
         {
             const int MinimumDiscount = 0;
 
@@ -27,7 +25,7 @@ namespace Ordering.Domain.ValueObjects
                 );
             }
 
-            if (Value > OrderItemValue)
+            if (Value > orderItemValue)
             {
                 throw new OrderException(
                     "O desconto aplicado ao item do pedido não pode ser maior que o valor do item do pedido.", 
