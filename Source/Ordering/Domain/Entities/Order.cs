@@ -8,48 +8,49 @@ namespace Ordering.Domain.Entities
 {
     public class Order
     {
-        public Guid Id { get; init; }
-        public Identifier Identifier { get; init; }
-        public OrderTimeline TimeLine { get; init; }
-        private List<OrderItem> _items { get; init; }
-        public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
+        public Guid Id { get; }
+        public Identifier Identifier { get; }
+        public OrderItems OrderItems { get; }
+        public OrderTimeline TimeLine { get; }
         public OrderStatus Status { get; private set; }
-        private decimal TotalValueOfAllItemsInTheOrder => _items.Sum(item => item.NetOrderItemValue);
-        private decimal OrderDiscountAmount = 0;
-        public decimal TotalOrderValue => TotalValueOfAllItemsInTheOrder - OrderDiscountAmount;
+        private Money OrderDiscount { get; set; }
 
-        internal Order(Guid id, Identifier identifier, OrderTimeline timeLine, 
-            IEnumerable<OrderItem> items, OrderStatus status)
+        internal Order(Guid id, Identifier identifier, IEnumerable<OrderItem> items, 
+            OrderTimeline timeLine, OrderStatus status, Money orderDiscount)
         {
             Id = id;
             Identifier = identifier;
+            OrderItems = new OrderItems(items);
             TimeLine = timeLine;
-
-            _items = items is null ? throw new OrderException(
-                "A lista de itens do pedido não pode ser nula.",
-                string.Empty
-            ) : new List<OrderItem>(items);
-
             Status = status;
+            OrderDiscount = orderDiscount;
         }
 
         public void AddItemToOrder(OrderItem item)
         {
-            _items.Add(item);
+            OrderItems.Add(item);
             TimeLine.AddEvent(new UtcInstant(DateTime.UtcNow), ActionTimelineOfTheOrder.ItemAdded);
         }
 
         public void RemoveItemFromOrder(Guid orderItemId)
         {
-            _items.RemoveAll(item => item.Id == orderItemId);
+            OrderItems.Remove(orderItemId);
             TimeLine.AddEvent(new UtcInstant(DateTime.UtcNow), ActionTimelineOfTheOrder.ItemRemoved);
         }
 
-        public void AddDiscountToOrder(decimal discount)
+        public void AddDiscountToOrder(Money discount)
         {
             const int MinimumDiscount = 0;
 
-            if (discount < MinimumDiscount)
+            if (!Money.SameCurrency(OrderDiscount, discount))
+            {
+                throw new OrderException(
+                    "A moeda do desconto concedido ao pedido deve ser a mesma do pedido.", 
+                    discount.Currency.Code
+                );
+            }
+
+            if (discount.Amount < MinimumDiscount)
             {
                 throw new OrderException(
                     "O valor do desconto concedido ao pedido não pode ser negativo.", 
@@ -57,15 +58,15 @@ namespace Ordering.Domain.Entities
                 );
             }
 
-            if (discount > TotalValueOfAllItemsInTheOrder)
+            if (discount.Amount > OrderItems.TotalValueOfAllItemsInTheOrder().Amount)
             {
                 throw new OrderException(
                      "O valor do desconto concedido ao pedido não pode ser maior que o valor total do pedido.",
-                     discount.ToString()
+                     discount.Amount.ToString()
                 );
             }
 
-            OrderDiscountAmount = discount;
+            OrderDiscount = discount;
         }
 
         public void CloseOrder()
@@ -76,10 +77,12 @@ namespace Ordering.Domain.Entities
 
         public void UpdateOrderItemStatus(Guid idOrderItem, OrderItemStatus newStatus)
         {
-            _items
-                .Where(item => item.Id == idOrderItem)
-                .First()
-                .UpdateStatus(newStatus);
+            OrderItems.UpdateItemStatus(idOrderItem, newStatus);
+        }
+
+        public Money TotalOrderValue()
+        {
+            return OrderItems.TotalValueOfAllItemsInTheOrder().Subtract(OrderDiscount);
         }
     }
 }

@@ -10,8 +10,7 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemCategories(IEnumerable<Category> categories)
         {
-            if (categories is null)
-                throw new MenuException("A coleção de categorias não pode ser nula.", string.Empty);
+            ArgumentNullException.ThrowIfNull(categories, nameof(categories));
 
             _categories = new List<Category>(categories);
 
@@ -27,7 +26,7 @@ namespace Menu.Domain.EntityComposition
         private void EnsureAtLeastOne(IReadOnlyCollection<Category> categories)
         {
             if (categories.Count == 0)
-                throw new MenuException("O item do menu precisa possuir ao menos uma categoria.", string.Empty);
+                throw new MenuException("O item do menu precisa possuir ao menos uma categoria.");
         }
 
         private void EnsureNoDuplicates(IReadOnlyCollection<Category> categories)
@@ -37,7 +36,7 @@ namespace Menu.Domain.EntityComposition
                 .FirstOrDefault(g => g.Count() > 1);
 
             if (duplicate != null)
-                throw new MenuException($"Categoria repetida: {duplicate.Key}", string.Empty);
+                throw new MenuException($"Categoria repetida: {duplicate.Key}");
         }
 
         public void Add(Category category)

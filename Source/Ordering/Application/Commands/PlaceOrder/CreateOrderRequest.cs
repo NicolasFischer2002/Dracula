@@ -1,12 +1,16 @@
-﻿namespace Ordering.Application.Commands.PlaceOrder
+﻿using SharedKernel.ValueObjects;
+
+namespace Ordering.Application.Commands.PlaceOrder
 {
     public sealed record CreateOrderRequest
     {
-        public string Identifier { get; init; }
+        public string Identifier { get; }
+        public Currency Currency { get; }
 
-        public CreateOrderRequest(string identifier)
+        public CreateOrderRequest(string identifier, Currency currency)
         {
             Identifier = identifier;
+            Currency = currency;
         }
     }
 }

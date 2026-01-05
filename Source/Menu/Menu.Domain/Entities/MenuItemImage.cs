@@ -2,7 +2,7 @@
 {
     public sealed class MenuItemImage
     {
-        public Guid Id { get; init; }
+        public Guid Id { get; }
         public Uri Url { get; private set; }
         public string ContentType { get; private set; }
         public bool IsPrimary { get; private set; }

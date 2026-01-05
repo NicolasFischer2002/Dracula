@@ -8,7 +8,7 @@ namespace Ordering.Domain.ValueObjects
     /// </summary>
     public record Identifier
     {
-        public string Id { get; init; }
+        public string Id { get; }
 
         public Identifier(string id)
         {
