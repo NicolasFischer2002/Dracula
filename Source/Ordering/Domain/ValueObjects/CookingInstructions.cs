@@ -4,7 +4,7 @@ namespace Ordering.Domain.ValueObjects
 {
     public sealed record CookingInstructions
     {
-        public string Note { get; init; }
+        public string Note { get; }
 
         public CookingInstructions(string note)
         {

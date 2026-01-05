@@ -4,7 +4,7 @@ namespace Ordering.Domain.ValueObjects
 {
     public sealed record OrderItemName
     {
-        public string Value { get; init; }
+        public string Value { get; }
 
         public OrderItemName(string value)
         {
@@ -17,10 +17,7 @@ namespace Ordering.Domain.ValueObjects
         {
             if (string.IsNullOrWhiteSpace(Value))
             {
-                throw new OrderException(
-                    "O nome do item do pedido não estar vazio.",
-                    string.Empty
-                );
+                throw new OrderException("O nome do item do pedido não estar vazio.");
             }
 
             const int maxLength = 150;

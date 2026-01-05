@@ -3,11 +3,6 @@ using Menu.Domain.Exceptions;
 
 namespace Menu.Domain.EntityComposition
 {
-    // Berlim => Continuação
-    // Construir novo Bounded Context para o Controle de Estoque de Ingredientes;
-    // Será deste BC que o Id "IngredientId" de MenuItemIngredient vem.
-    // No BC de Ordering, nas entidades Order e OrderItem, será necessário trocar
-    // os valores monetários de decimal para o tipo Money recém criado no Shared Kernel.
     public sealed class MenuItemIngredients
     {
         private readonly List<MenuItemIngredient> _ingredients;
@@ -15,52 +10,57 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemIngredients(IEnumerable<MenuItemIngredient> ingredients)
         {
-            if (ingredients is null)
-                throw new MenuException("A lista de ingredientes do item do menu não pode ser nula.", string.Empty);
+            ArgumentNullException.ThrowIfNull(ingredients, nameof(ingredients));
 
             _ingredients = new List<MenuItemIngredient>(ingredients);
-            EnsureNoDuplicates(_ingredients);
+
+            ValidateMenuIngredients(_ingredients);
+        }
+
+        private void ValidateMenuIngredients(IEnumerable<MenuItemIngredient> items)
+        {
+            EnsureMinimumSizeQuantityOfIngredients(items);
+            EnsureNoDuplicates(items);
+        }
+
+        private void EnsureMinimumSizeQuantityOfIngredients(IEnumerable<MenuItemIngredient> items)
+        {
+            if (_ingredients.Count == 1)
+                throw new MenuException("Item do menu deve possuir ao menos um ingrediente.");
         }
 
         private void EnsureNoDuplicates(IEnumerable<MenuItemIngredient> items)
         {
-            var seenIds = new HashSet<Guid>();
-            var seenNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            foreach (var it in items)
+            if (items.GroupBy(i => i.IngredientName.ToString()).Any(i => i.Count() > 1))
             {
-                if (seenIds.Contains(it.IngredientId))
-                    throw new MenuException($"Ingrediente duplicado (IngredientId): {it.IngredientId}", string.Empty);
-
-                var name = it.IngredientName?.Name ?? string.Empty;
-                if (!string.IsNullOrWhiteSpace(name) && !seenNames.Add(name))
-                    throw new MenuException($"Ingrediente duplicado (nome): {name}", string.Empty);
-
-                seenIds.Add(it.IngredientId);
+                throw new MenuException("A lista de ingredientes do item do menu possui ingredientes duplicados.");
             }
         }
 
         public void Add(MenuItemIngredient ingredient)
         {
-            if (ingredient is null) throw new MenuException("Ingrediente requerido.", string.Empty);
-            if (_ingredients.Any(i => i.Id == ingredient.Id)) return; // idempotente por Id
+            ArgumentNullException.ThrowIfNull(ingredient, nameof(ingredient));
 
-            // projeção e validação leve
-            var projected = _ingredients.Concat(new[] { ingredient }).ToList();
-            EnsureNoDuplicates(projected);
+            var projected = _ingredients.Concat([ingredient]).ToList();
+
+            ValidateMenuIngredients(projected);
 
             _ingredients.Add(ingredient);
         }
 
         public void Remove(Guid menuItemIngredientId)
         {
-            var found = _ingredients.FirstOrDefault(i => i.Id == menuItemIngredientId);
-            if (found is null) throw new MenuException("Ingrediente não encontrado.", menuItemIngredientId.ToString());
+            if (!ContainsByIngredientId(menuItemIngredientId))
+            {
+                throw new MenuException("O ingrediente do item do menu que se deseja remover não existe.");
+            }
 
-            if (_ingredients.Count == 1)
-                throw new MenuException("Item do menu deve possuir ao menos um ingrediente.", string.Empty);
+            var projected = new List<MenuItemIngredient>(_ingredients);
+            projected.RemoveAll(i => i.Id == menuItemIngredientId);
 
-            _ingredients.Remove(found);
+            ValidateMenuIngredients(projected);
+
+            _ingredients.RemoveAll(i => i.Id == menuItemIngredientId);
         }
 
         public bool ContainsByIngredientId(Guid ingredientId) =>

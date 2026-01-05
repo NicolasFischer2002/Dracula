@@ -1,5 +1,12 @@
 <Solution>
   <Folder Name="/Source/" />
+  <Folder Name="/Source/IngredientInventory/">
+    <Project Path="Source/IngredientInventory/IngredientInventory.Api/IngredientInventory.Api.csproj" Id="4e57f609-6934-4035-8b04-2c4c8b3cc9a2" />
+    <Project Path="Source/IngredientInventory/IngredientInventory.Application/IngredientInventory.Application.csproj" Id="ff37b4b3-83ac-4578-bf0b-a197380ff744" />
+    <Project Path="Source/IngredientInventory/IngredientInventory.Domain/IngredientInventory.Domain.csproj" Id="a054349b-175a-4d86-b654-8eb1a5896e78" />
+    <Project Path="Source/IngredientInventory/IngredientInventory.Infrastructure/IngredientInventory.Infrastructure.csproj" Id="13a970cc-aa27-4792-97fa-058300886853" />
+    <Project Path="Source/IngredientInventory/IngredientInventory.Tests/IngredientInventory.Tests.csproj" Id="748a2629-a3ab-4fe8-84d5-4f0401d4fab0" />
+  </Folder>
   <Folder Name="/Source/Menu/">
     <Project Path="Source/Menu/Menu.Api/Menu.Api.csproj" Id="b50cc833-c34d-4f4f-aedc-cd32523f20d0" />
     <Project Path="Source/Menu/Menu.Application/Menu.Application.csproj" Id="e804a827-64dc-4666-a6a1-7905d46db154" />

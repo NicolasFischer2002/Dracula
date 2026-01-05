@@ -5,10 +5,10 @@ namespace Menu.Domain.ValueObjects
 {
     public sealed record MenuItemQuantity
     {
-        public decimal Amount { get; init; }
-        public MenuItemUnit Unit { get; init; }
+        public int Amount { get; }
+        public MenuItemUnit Unit { get; }
 
-        public MenuItemQuantity(decimal amount, MenuItemUnit unit)
+        public MenuItemQuantity(int amount, MenuItemUnit unit)
         {
             Amount = amount;
             Unit = unit;
@@ -23,7 +23,7 @@ namespace Menu.Domain.ValueObjects
             if (Amount < MinimumAmount)
             {
                 throw new MenuException(
-                    $"A quantidade do item do menu deve ser maior que {MinimumAmount}.", 
+                    $"A quantidade do item do menu deve ser maior que {MinimumAmount}.",
                     Amount.ToString()
                 );
             }
