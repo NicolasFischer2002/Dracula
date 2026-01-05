@@ -5,7 +5,7 @@ namespace Menu.Domain.ValueObjects
 {
     public sealed record BrandOfTheIngredientInTheMenuItem
     {
-        public string Brand { get; init; }
+        public string Brand { get; }
 
         public BrandOfTheIngredientInTheMenuItem(string brand)
         {

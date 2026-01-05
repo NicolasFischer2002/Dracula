@@ -80,5 +80,7 @@ namespace SharedKernel.ValueObjects
                     Amount
                 );
         }
+
+        public static bool SameCurrency(Money money_1, Money money_2) => money_1.Currency == money_2.Currency;
     }
 }

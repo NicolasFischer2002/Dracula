@@ -1,23 +1,24 @@
 ﻿using Menu.Domain.EntityComposition;
 using Menu.Domain.Enums;
 using Menu.Domain.ValueObjects;
+using SharedKernel.ValueObjects;
 
 namespace Menu.Domain.Entities
 {
     public sealed class MenuItem
     {
-        public Guid Id { get; init; }
-        public MenuItemCategories Categories { get; init; }
+        public Guid Id { get; }
+        public MenuItemCategories Categories { get; }
         public MenuItemImages MenuItemImages { get; private set; }
         public ItemName Name { get; private set; }
-        public Price Price { get; private set; }
+        public Money Price { get; private set; }
         public MenuItemIngredients Ingredients { get; private set; }
         public PreparationTimeInMinutes? PreparationTimeInMinutes { get; private set; }
         public bool OptionalItem { get; private set; }
         public bool ItemIsActive { get; private set; }
 
         public MenuItem(Guid id, IEnumerable<Category> categories, IEnumerable<MenuItemImage> itemImages, 
-            ItemName name, Price price, IEnumerable<MenuItemIngredient> ingredients, 
+            ItemName name, Money price, IEnumerable<MenuItemIngredient> ingredients, 
             PreparationTimeInMinutes? preparationTimeInMinutes, bool optionalItem, bool itemIsActive)
         {
             Id = id;
@@ -32,7 +33,7 @@ namespace Menu.Domain.Entities
         }
 
         public void UpdateItemName(string newName) => Name = new ItemName(newName);
-        public void UpdatePrice(decimal newPrice) => Price = new Price(newPrice);
+        public void UpdatePrice(Money newPrice) => Price = newPrice;
         public void UpdatePreparationTimeInMinutes(int preparationTimeInMinutes)
         {
             PreparationTimeInMinutes = new PreparationTimeInMinutes(preparationTimeInMinutes);

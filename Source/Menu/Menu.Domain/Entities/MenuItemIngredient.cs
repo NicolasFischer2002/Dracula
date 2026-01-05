@@ -6,10 +6,10 @@ namespace Menu.Domain.Entities
 {
     public sealed class MenuItemIngredient
     {
-        public Guid Id { get; init; }
-        public Guid IngredientId { get; init; }
+        public Guid Id { get; }
+        public Guid IngredientId { get; }
         public IngredientName IngredientName { get; private set; }
-        public MenuItemQuantity Quantity { get; init; }
+        public MenuItemQuantity Quantity { get; }
         public bool IsOptional { get; private set; }
         public BrandOfTheIngredientInTheMenuItem Brand { get; private set; }
 

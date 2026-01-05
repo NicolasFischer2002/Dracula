@@ -1,23 +1,26 @@
 ﻿using Ordering.Domain.Exceptions;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Domain.ValueObjects
 {
     public sealed record OrderItemDiscount
     {
-        public decimal Value { get; init; }
+        public Money Value { get; }
+        private readonly Money OrderItemValue;
 
-        public OrderItemDiscount(decimal value, decimal orderItemValue)
+        public OrderItemDiscount(Money value, Money orderItemValue)
         {
             Value = value;
+            OrderItemValue = orderItemValue;
 
-            ValidateDiscount(orderItemValue);
+            ValidateDiscount();
         }
 
-        private void ValidateDiscount(decimal orderItemValue)
+        private void ValidateDiscount()
         {
             const int MinimumDiscount = 0;
 
-            if (Value < MinimumDiscount)
+            if (Value.Amount < MinimumDiscount)
             {
                 throw new OrderException(
                     "O desconto aplicado ao item do pedido não pode ser negativo.", 
@@ -25,7 +28,7 @@ namespace Ordering.Domain.ValueObjects
                 );
             }
 
-            if (Value > orderItemValue)
+            if (Value.Amount > OrderItemValue.Amount)
             {
                 throw new OrderException(
                     "O desconto aplicado ao item do pedido não pode ser maior que o valor do item do pedido.", 

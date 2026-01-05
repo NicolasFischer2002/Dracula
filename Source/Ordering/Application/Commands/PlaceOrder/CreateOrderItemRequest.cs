@@ -1,14 +1,16 @@
-﻿namespace Ordering.Application.Commands.PlaceOrder
+﻿using SharedKernel.ValueObjects;
+
+namespace Ordering.Application.Commands.PlaceOrder
 {
     public sealed record CreateOrderItemRequest
     {
-        public Guid WaiterId { get; init; }
-        public string NameItem { get; init; } 
-        public decimal GrossValue { get; init; }
-        public decimal Discount { get; init; }
-        public string CookingInstructions { get; init; }
+        public Guid WaiterId { get; }
+        public string NameItem { get; } 
+        public Money GrossValue { get; }
+        public Money Discount { get; }
+        public string CookingInstructions { get; }
 
-        public CreateOrderItemRequest(Guid waiterId, string nameItem, decimal grossValue, decimal discount, 
+        public CreateOrderItemRequest(Guid waiterId, string nameItem, Money grossValue, Money discount, 
             string cookingInstructions)
         {
             WaiterId = waiterId;

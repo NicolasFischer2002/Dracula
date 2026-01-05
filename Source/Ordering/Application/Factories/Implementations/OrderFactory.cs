@@ -17,7 +17,6 @@ namespace Ordering.Application.Factories.Implementations
             return new Order(
                 Guid.NewGuid(),
                 new Identifier(orderRequest.Identifier),
-                new OrderTimeline(new UtcInstant(DateTime.UtcNow)),
                 requestForOrderItems.Select(itemRequest => new OrderItem(
                     Guid.NewGuid(),
                     itemRequest.WaiterId,
@@ -28,7 +27,9 @@ namespace Ordering.Application.Factories.Implementations
                     new OrderItemTimeline(new UtcInstant(DateTime.UtcNow)),
                     OrderItemStatus.Waiting
                 )).ToList(),
-                OrderStatus.Open
+                new OrderTimeline(new UtcInstant(DateTime.UtcNow)),
+                OrderStatus.Open,
+                Money.Zero(orderRequest.Currency)
             );            
         }
     }

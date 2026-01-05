@@ -1,12 +1,13 @@
 ﻿using Ordering.Domain.Exceptions;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Domain.ValueObjects
 {
     public sealed record GrossOrderItemValue
     {
-        public decimal Value { get; init; }
+        public Money Value { get; }
 
-        public GrossOrderItemValue(decimal value)
+        public GrossOrderItemValue(Money value)
         {
             Value = value;
 
@@ -17,7 +18,7 @@ namespace Ordering.Domain.ValueObjects
         {
             const int MinimumGrossValue = 0;
             
-            if (Value < MinimumGrossValue)
+            if (Value.Amount < MinimumGrossValue)
             {
                 throw new OrderException(
                     "O valor bruto do item do pedido não pode ser negativo.",

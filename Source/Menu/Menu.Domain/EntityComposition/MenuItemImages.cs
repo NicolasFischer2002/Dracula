@@ -11,10 +11,9 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemImages(IEnumerable<MenuItemImage> itemImages)
         {
-            _itemImages = itemImages is null ? throw new MenuException(
-                "A coleção de imagens do item do menu não pode ser nula.",
-                string.Empty
-            ) : new List<MenuItemImage>(itemImages);
+            ArgumentNullException.ThrowIfNull(itemImages, nameof(itemImages));
+
+            _itemImages = new List<MenuItemImage>(itemImages);
 
             ValidateItemImages(_itemImages);
         }
@@ -42,10 +41,7 @@ namespace Menu.Domain.EntityComposition
         {
             if (!images.Any(ii => ii.IsPrimary))
             {
-                throw new MenuException(
-                    "Uma imagem deve ser marcada como principal para este item do menu.",
-                    string.Empty
-                );
+                throw new MenuException("Uma imagem deve ser marcada como principal para este item do menu.");
             }
         }
 
@@ -74,17 +70,13 @@ namespace Menu.Domain.EntityComposition
             if (repeatedImagesOfMenuItems.Any())
             {
                 var duplicatedUrls = string.Join(", ", repeatedImagesOfMenuItems);
-                throw new MenuException(
-                    $"As imagens adicionadas ao item do menu estão repetidas: {duplicatedUrls}",
-                    string.Empty
-                );
+                throw new MenuException($"As imagens adicionadas ao item do menu estão repetidas: {duplicatedUrls}");
             }
         }
 
         public void SetPrimaryImage(MenuItemImage newImage)
         {
-            if (newImage is null)
-                throw new MenuException("A imagem atrelada ao item do menu não pode ser nula.", string.Empty);
+            ArgumentNullException.ThrowIfNull(newImage, nameof(newImage));
 
             var projectedImages = _itemImages
                     .Where(ii => !ii.IsPrimary)
@@ -100,24 +92,13 @@ namespace Menu.Domain.EntityComposition
 
         public void RemoveImageByUrl(Uri imageUrl)
         {
-            var imageToRemove = _itemImages.FirstOrDefault(ii => ii.Url == imageUrl);
+            ArgumentNullException.ThrowIfNull(imageUrl, nameof(imageUrl));
 
-            if (imageToRemove is null)
-            {
-                throw new MenuException(
-                    "A imagem que deveria ser removida não está atrelada ao item do menu.",
-                    imageUrl.ToString()
-                );
-            }
-
-            var projectedImages = _itemImages
-                .Where(ii => ii.Url != imageUrl)
-                .ToList();
-
-            ValidateItemImages(projectedImages);
+            var newImages = _itemImages.Where(ii => ii.Url != imageUrl).ToList();
+            ValidateItemImages(newImages);
 
             _itemImages.Clear();
-            _itemImages.AddRange(projectedImages);
+            _itemImages.AddRange(newImages);
         }
     }
 }
