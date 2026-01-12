@@ -9,8 +9,8 @@ namespace Menu.Domain.ValueObjects
 
         public IngredientName(string name)
         {
+            MenuException.ThrowIfNull(name, nameof(name));
             Name = StringNormalizer.Normalize(name);
-
             ValidadeName();
         }
 
@@ -19,23 +19,17 @@ namespace Menu.Domain.ValueObjects
             const int MinimumLength = 1;
             const int MaximumLength = 100;
 
-            if (Name.Length < MinimumLength)
-            {
-                throw new MenuException(
-                    $"O nome do item do menu é inválido. O mínimo de caracteres que ele pode " +
-                    $"possuir é {MinimumLength}.",
-                    Name
-                );
-            }
+            MenuException.ThrowIf(
+                Name.Length < MinimumLength,
+                Name,
+                $"O nome do item do menu é inválido. O mínimo de caracteres que ele pode possuir é {MinimumLength}."
+            );
 
-            if (Name.Length > MaximumLength)
-            {
-                throw new MenuException(
-                    $"O nome do item do menu é inválido. O máximo de caracteres que ele pode " +
-                    $"possuir é {MaximumLength}.",
-                    Name
-                );
-            }
+            MenuException.ThrowIf(
+                Name.Length > MaximumLength,
+                Name,
+                $"O nome do item do menu é inválido. O máximo de caracteres que ele pode possuir é {MaximumLength}."
+            );
         }
 
         public override string ToString() => Name;

@@ -13,20 +13,20 @@ namespace Menu.Domain.ValueObjects
             Amount = amount;
             Unit = unit;
 
-            ValidadeAmount();
+            ValidateAmount();
         }
 
-        private void ValidadeAmount()
+        private void ValidateAmount()
         {
             const int MinimumAmount = 0;
 
-            if (Amount < MinimumAmount)
-            {
-                throw new MenuException(
-                    $"A quantidade do item do menu deve ser maior que {MinimumAmount}.",
-                    Amount.ToString()
-                );
-            }
+            MenuException.ThrowIf(
+                Amount < MinimumAmount,
+                Amount.ToString(),
+                $"A quantidade do item do menu deve ser maior ou igual a {MinimumAmount}."
+            );
         }
+
+        public override string ToString() => $"{Amount} {Unit}";
     }
 }

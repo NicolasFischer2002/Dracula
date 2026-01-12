@@ -10,6 +10,9 @@ namespace Ordering.Domain.ValueObjects
 
         public OrderItemDiscount(Money value, Money orderItemValue)
         {
+            OrderException.ThrowIfNull(value, nameof(value));
+            OrderException.ThrowIfNull(orderItemValue, nameof(orderItemValue));
+
             Value = value;
             OrderItemValue = orderItemValue;
 
@@ -18,23 +21,21 @@ namespace Ordering.Domain.ValueObjects
 
         private void ValidateDiscount()
         {
-            const int MinimumDiscount = 0;
+            const decimal MinimumDiscount = 0m;
 
-            if (Value.Amount < MinimumDiscount)
-            {
-                throw new OrderException(
-                    "O desconto aplicado ao item do pedido não pode ser negativo.", 
-                    Value.ToString()
-                );
-            }
+            OrderException.ThrowIf(
+                Value.Amount < MinimumDiscount,
+                Value.Amount.ToString(),
+                "O desconto aplicado ao item do pedido não pode ser negativo."
+            );
 
-            if (Value.Amount > OrderItemValue.Amount)
-            {
-                throw new OrderException(
-                    "O desconto aplicado ao item do pedido não pode ser maior que o valor do item do pedido.", 
-                    Value.ToString()
-                );
-            }
+            OrderException.ThrowIf(
+                Value.Amount > OrderItemValue.Amount,
+                Value.Amount.ToString(),
+                "O desconto não pode exceder o valor do item do pedido."
+            );
         }
+
+        public override string ToString() => Value.ToString();
     }
 }
