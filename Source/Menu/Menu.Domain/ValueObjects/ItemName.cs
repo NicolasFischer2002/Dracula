@@ -5,34 +5,31 @@ namespace Menu.Domain.ValueObjects
 {
     public sealed record ItemName
     {
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public ItemName(string name)
         {
+            MenuException.ThrowIfNull(name, nameof(name));
             Name = StringNormalizer.Normalize(name);
             ValidateName();
         }
 
         private void ValidateName()
         {
-            const int minLength = 1;
-            const int maxLength = 150;
+            const int MinimumLength = 1;
+            const int MaximumLength = 150;
 
-            if (Name.Length < minLength)
-            {
-                throw new MenuException(
-                    $"O nome de um item do menu não pode possuir menos de {minLength} caracteres.",
-                    Name
-                );
-            }
+            MenuException.ThrowIf(
+                Name.Length < MinimumLength,
+                Name,
+                $"O nome do item do menu deve ter pelo menos {MinimumLength} caractere(s)."
+            );
 
-            if (Name.Length > maxLength)
-            {
-                throw new MenuException(
-                    $"O nome de um item do menu não pode possuir mais de {maxLength} caracteres.",
-                    Name
-                );
-            }
+            MenuException.ThrowIf(
+                Name.Length > MaximumLength,
+                Name,
+                $"O nome do item do menu não pode exceder {MaximumLength} caractere(s)."
+            );
         }
 
         public override string ToString() => Name;

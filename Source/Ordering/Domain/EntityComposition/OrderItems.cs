@@ -7,78 +7,93 @@ namespace Ordering.Domain.EntityComposition
 {
     public sealed class OrderItems
     {
-        private List<OrderItem> _items { get; }
+        private readonly List<OrderItem> _items;
         public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
+
+        /// <summary>
+        /// Gets the currency from the first item. Assumes all items have the same currency
+        /// due to validation invariants.
+        /// </summary>
         private Currency Currency => _items.First().Currency;
 
         public OrderItems(IEnumerable<OrderItem> items)
         {
-            ArgumentNullException.ThrowIfNull(items, nameof(items));
-
-            _items = new List<OrderItem>(items);
-
-            ValidateOrderItems(_items);
-        }
-
-        private void ValidateOrderItems(IEnumerable<OrderItem> items)
-        {
-            EnsureMinimumQuantityOfItems(items);
-            EnsureThatAllItemsHaveTheSameCurrency(items);
-        }
-
-        private void EnsureMinimumQuantityOfItems(IEnumerable<OrderItem> items)
-        {
-            const int MinimumItemsQuantity = 1;
-
-            if (items.Count() < MinimumItemsQuantity)
-            {
-                throw new OrderException(
-                    $"A quantidade mínima de itens em um pedido deve ser de {MinimumItemsQuantity} item."
-                );
-            }
-        }
-
-        private void EnsureThatAllItemsHaveTheSameCurrency(IEnumerable<OrderItem> items)
-        {
-            if (items.GroupBy(i => i.Currency.Code).Count() > 1)
-            {
-                throw new OrderException("Todos os items do pedido devem possuir a mesma moeda.");
-            }
+            OrderException.ThrowIfNull(items, nameof(items));
+            _items = [.. items];
+            EnsureValidState(_items);
         }
 
         public void Add(OrderItem orderItem)
         {
+            OrderException.ThrowIfNull(orderItem, nameof(orderItem));
             _items.Add(orderItem);
         }
 
         public void Remove(Guid orderItemId)
         {
-            if (!_items.Any(i => i.Id == orderItemId))
-            {
-                throw new OrderException(
-                    $"O Id do item do pedido não foi encontrado.",
-                    orderItemId.ToString()
-                );
-            }
+            FailIfItemNotFound(orderItemId);
+            var projectedItems = new List<OrderItem>(_items.Where(item => item.Id != orderItemId));
 
-            var projected = new List<OrderItem>(_items);
-            projected.RemoveAll(item => item.Id == orderItemId);
-
-            ValidateOrderItems(projected);
-
+            EnsureValidState(projectedItems);
             _items.RemoveAll(item => item.Id == orderItemId);
         }
 
-        public void UpdateItemStatus(Guid idOrderItem, OrderItemStatus newStatus)
+        public void UpdateItemStatus(Guid orderItemId, OrderItemStatus newStatus)
         {
-            _items
-                .First(item => item.Id == idOrderItem)
-                .UpdateStatus(newStatus);
+            var item = _items.FirstOrDefault(item => item.Id == orderItemId);
+
+            OrderException.ThrowIfNull(
+                item,
+                "Item do pedido não encontrado para atualização de status."
+            );
+
+            item!.UpdateStatus(newStatus);
         }
 
+        /// <summary>
+        /// Calculates the total gross value of all order items in the order currency.
+        /// </summary>
         public Money TotalValueOfAllItemsInTheOrder()
         {
-            return new Money(_items.Sum(item => item.NetOrderItemValue().Amount), Currency);
+            var totalAmount = _items.Sum(item => item.NetOrderItemValue().Amount);
+            return new Money(totalAmount, Currency);
+        }
+
+        private static void EnsureValidState(IReadOnlyCollection<OrderItem> items)
+        {
+            OrderException.ThrowIfNull(items, nameof(items));
+
+            EnsureMinimumQuantityOfItems(items);
+            EnsureAllItemsHaveSameCurrency(items);
+        }
+
+        private static void EnsureMinimumQuantityOfItems(IReadOnlyCollection<OrderItem> items)
+        {
+            const int MinimumItemsQuantity = 1;
+
+            OrderException.ThrowIf(
+                items.Count < MinimumItemsQuantity,
+                $"Um pedido deve conter pelo menos {MinimumItemsQuantity} item(ns)."
+            );
+        }
+
+        private static void EnsureAllItemsHaveSameCurrency(IReadOnlyCollection<OrderItem> items)
+        {
+            var currencyGroups = items.GroupBy(i => i.Currency.Code).ToList();
+
+            OrderException.ThrowIf(
+                currencyGroups.Count > 1,
+                "Todos os itens do pedido devem possuir a mesma moeda."
+            );
+        }
+
+        private void FailIfItemNotFound(Guid orderItemId)
+        {
+            OrderException.ThrowIf(
+                !_items.Any(i => i.Id == orderItemId),
+                orderItemId.ToString(),
+                "Item do pedido não encontrado."
+            );
         }
     }
 }

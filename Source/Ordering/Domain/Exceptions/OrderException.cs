@@ -2,7 +2,7 @@
 
 namespace Ordering.Domain.Exceptions
 {
-    public class OrderException : CustomException<string>
+    public sealed class OrderException : CustomException<string>
     {
         public OrderException(string message) : base(message)
         {
@@ -22,6 +22,11 @@ namespace Ordering.Domain.Exceptions
             : base(message, invalidValue, innerException)
         {
             
+        }
+
+        public static new OrderException Create(string message, string invalidValue)
+        {
+            return new OrderException(message, invalidValue);
         }
     }
 }

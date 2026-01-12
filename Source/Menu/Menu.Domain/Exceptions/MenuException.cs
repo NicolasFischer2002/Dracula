@@ -23,5 +23,10 @@ namespace Menu.Domain.Exceptions
         {
 
         }
+
+        public static new MenuException Create(string message, string invalidValue)
+        {
+            return new MenuException(message, invalidValue);
+        }
     }
 }

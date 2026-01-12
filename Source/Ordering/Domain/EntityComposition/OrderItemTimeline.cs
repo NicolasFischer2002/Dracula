@@ -13,22 +13,33 @@ public sealed class OrderItemTimeline
 
     public OrderItemTimeline(UtcInstant orderCreationMoment)
     {
+        OrderException.ThrowIfNull(orderCreationMoment, nameof(orderCreationMoment));
+
+        var creationTime = orderCreationMoment.Value;
         _events = new SortedDictionary<DateTime, ActionTimelineOfTheOrderItem>
         {
-            [orderCreationMoment.Value] = ActionTimelineOfTheOrderItem.OrderItemCreated
+            [creationTime] = ActionTimelineOfTheOrderItem.OrderItemCreated
         };
-
-        LastUpdated = orderCreationMoment.Value;
+        LastUpdated = creationTime;
     }
 
     public void AddEvent(UtcInstant eventTime, ActionTimelineOfTheOrderItem action)
     {
-        var when = eventTime.Value;
+        OrderException.ThrowIfNull(eventTime, nameof(eventTime));
 
-        if (_events.ContainsKey(when))
-            throw new OrderException("Já existe um evento na mesma marca temporal.", when.ToString());
+        var eventTimestamp = eventTime.Value;
+        FailIfEventTimestampAlreadyExists(eventTimestamp);
 
-        _events.Add(when, action);
-        LastUpdated = when;
+        _events.Add(eventTimestamp, action);
+        LastUpdated = eventTimestamp;
+    }
+
+    private void FailIfEventTimestampAlreadyExists(DateTime eventTimestamp)
+    {
+        OrderException.ThrowIf(
+            _events.ContainsKey(eventTimestamp),
+            eventTimestamp.ToString(),
+            "Já existe um evento registrado no mesmo timestamp."
+        );
     }
 }

@@ -40,33 +40,44 @@ namespace Ordering.Domain.Entities
 
         public void AddDiscountToOrder(Money discount)
         {
-            const int MinimumDiscount = 0;
+            OrderException.ThrowIfNull(discount, nameof(discount));
 
-            if (!Money.SameCurrency(OrderDiscount, discount))
-            {
-                throw new OrderException(
-                    "A moeda do desconto concedido ao pedido deve ser a mesma do pedido.", 
-                    discount.Currency.Code
-                );
-            }
-
-            if (discount.Amount < MinimumDiscount)
-            {
-                throw new OrderException(
-                    "O valor do desconto concedido ao pedido não pode ser negativo.", 
-                    discount.ToString()
-                );
-            }
-
-            if (discount.Amount > OrderItems.TotalValueOfAllItemsInTheOrder().Amount)
-            {
-                throw new OrderException(
-                     "O valor do desconto concedido ao pedido não pode ser maior que o valor total do pedido.",
-                     discount.Amount.ToString()
-                );
-            }
+            FailIfDifferentCurrency(discount);
+            FailIfNegativeDiscount(discount);
+            FailIfExceedsOrderTotal(discount);
 
             OrderDiscount = discount;
+        }
+
+        private void FailIfDifferentCurrency(Money discount)
+        {
+            OrderException.ThrowIf(
+                !Money.SameCurrency(OrderDiscount, discount),
+                discount.Currency.Code,
+                "O desconto deve ter a mesma moeda do pedido."
+            );
+        }
+
+        private static void FailIfNegativeDiscount(Money discount)
+        {
+            const decimal MinimumDiscount = 0;
+
+            OrderException.ThrowIf(
+                discount.Amount < MinimumDiscount,
+                discount.Amount.ToString(),
+                "O desconto não pode ser negativo."
+            );
+        }
+
+        private void FailIfExceedsOrderTotal(Money discount)
+        {
+            var orderTotal = OrderItems.TotalValueOfAllItemsInTheOrder();
+
+            OrderException.ThrowIf(
+                discount.Amount > orderTotal.Amount,
+                discount.Amount.ToString(),
+                "O desconto não pode exceder o valor total do pedido."
+            );
         }
 
         public void CloseOrder()

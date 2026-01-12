@@ -1,4 +1,5 @@
 ﻿using Ordering.Domain.Exceptions;
+using SharedKernel.Formatters;
 
 namespace Ordering.Domain.ValueObjects
 {
@@ -8,24 +9,19 @@ namespace Ordering.Domain.ValueObjects
 
         public CookingInstructions(string note)
         {
-            Note = note;
-            ValidadeDescription();
+            Note = StringNormalizer.Normalize(note);
+            ValidateNote();
         }
 
-        private void ValidadeDescription()
+        private void ValidateNote()
         {
-            const int MaximumDescriptionLength = 250;
+            const int MaximumNoteLength = 250;
 
-            if (!string.IsNullOrWhiteSpace(Note))
-            {
-                if (Note.Length > MaximumDescriptionLength)
-                {
-                    throw new OrderException(
-                        $"A observação do item do pedido excedeu ao limite de {MaximumDescriptionLength} caracteres.",
-                        Note
-                    );
-                }
-            }
+            OrderException.ThrowIf(
+                Note.Length > MaximumNoteLength,
+                Note,
+                $"Observações do item do pedido não podem exceder {MaximumNoteLength} caracteres."
+            );
         }
 
         public override string ToString() => Note;
