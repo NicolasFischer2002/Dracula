@@ -40,13 +40,10 @@ namespace Menu.Domain.Entities
 
         private void Validate()
         {
-            if (!IsOptional && AdditionalPrice.Amount != 0)
-            {
-                throw new MenuException(
-                    "Um preço adicional só pode ser definido para ingredientes opcionais.",
-                    AdditionalPrice.ToString()
-                );
-            }
+            MenuException.ThrowIf(
+                !IsOptional && AdditionalPrice.Amount != 0,
+                "Um preço adicional só pode ser definido para ingredientes opcionais."
+            );
         }
 
         public Money CalculateAdditionalCost() => AdditionalPrice;

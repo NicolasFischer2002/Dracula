@@ -9,22 +9,22 @@ namespace Ordering.Domain.ValueObjects
 
         public GrossOrderItemValue(Money value)
         {
+            OrderException.ThrowIfNull(value, nameof(value));
             Value = value;
-
             ValidateGrossValue();
         }
 
         private void ValidateGrossValue()
         {
-            const int MinimumGrossValue = 0;
-            
-            if (Value.Amount < MinimumGrossValue)
-            {
-                throw new OrderException(
-                    "O valor bruto do item do pedido não pode ser negativo.",
-                    Value.ToString()
-                );
-            }
+            const decimal MinimumGrossValue = 0m;
+
+            OrderException.ThrowIf(
+                Value.Amount < MinimumGrossValue,
+                Value.Amount.ToString(),
+                "O valor bruto do item do pedido não pode ser negativo."
+            );
         }
+
+        public override string ToString() => Value.ToString();
     }
 }

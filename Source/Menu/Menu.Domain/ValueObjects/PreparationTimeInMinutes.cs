@@ -4,36 +4,32 @@ namespace Menu.Domain.ValueObjects
 {
     public sealed record PreparationTimeInMinutes
     {
-        public int Value { get; private set; }
+        public int Value { get; }
 
         public PreparationTimeInMinutes(int value)
         {
             Value = value;
-
             ValidateValue();
         }
 
         private void ValidateValue()
         {
-            const int Min = 0;
+            const int MinimumMinutes = 0;
             const int MinutesInDay = 1440;
 
-            if (Value < Min)
-            {
-                throw new MenuException(
-                    "O tempo necessário para preparar um item do menu não pode ser negativo.",
-                    Value.ToString()
-                );
-            }
+            MenuException.ThrowIf(
+                Value < MinimumMinutes,
+                Value.ToString(),
+                "O tempo de preparo do item do menu não pode ser negativo."
+            );
 
-            if (Value > MinutesInDay)
-            {
-                throw new MenuException(
-                    $"O tempo necessário para preparar um item do menu não pode ser superior a " +
-                    $"{MinutesInDay} minutos.",
-                    Value.ToString()
-                );
-            }
-        }  
+            MenuException.ThrowIf(
+                Value > MinutesInDay,
+                Value.ToString(),
+                $"O tempo de preparo não pode exceder {MinutesInDay} minutos (1 dia)."
+            );
+        }
+
+        public override string ToString() => Value.ToString();
     }
 }

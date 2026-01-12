@@ -32,18 +32,22 @@ namespace Ordering.Domain.Entities
 
             Currency = grossOrderItemValue.Value.Currency;
 
-            ValidateOrderItem();
+            EnsureValidState();
         }
 
-        private void ValidateOrderItem()
+        private void EnsureValidState()
         {
-            if (!Money.SameCurrency(GrossOrderItemValue.Value, Discount.Value))
-            {
-                throw new OrderException(
-                    "O valor bruto do item do pedido não pode ser de uma moeda diferente do valor desconto " +
-                    "concedido pedido."
-                );
-            }
+            EnsureSameCurrencyBetweenGrossAndDiscount();
+        }
+
+        private void EnsureSameCurrencyBetweenGrossAndDiscount()
+        {
+            OrderException.ThrowIf(
+                !Money.SameCurrency(GrossOrderItemValue.Value, Discount.Value),
+                Discount.Value.Currency.Code,
+                "O valor bruto do item do pedido não pode ser de uma moeda diferente do valor desconto " +
+                "concedido pedido."
+            );
         }
 
         public void UpdateStatus(OrderItemStatus newStatus)

@@ -5,56 +5,66 @@ namespace Menu.Domain.EntityComposition
 {
     public sealed class MenuItemCategories
     {
-        private readonly List<Category> _categories;
+        private readonly HashSet<Category> _categories;
         public IReadOnlyCollection<Category> Categories => _categories.AsReadOnly();
 
         public MenuItemCategories(IEnumerable<Category> categories)
         {
             ArgumentNullException.ThrowIfNull(categories, nameof(categories));
 
-            _categories = new List<Category>(categories);
-
-            ValidateCategories(_categories);
-        }
-
-        private void ValidateCategories(IReadOnlyCollection<Category> categories)
-        {
-            EnsureAtLeastOne(categories);
-            EnsureNoDuplicates(categories);
-        }
-
-        private void EnsureAtLeastOne(IReadOnlyCollection<Category> categories)
-        {
-            if (categories.Count == 0)
-                throw new MenuException("O item do menu precisa possuir ao menos uma categoria.");
-        }
-
-        private void EnsureNoDuplicates(IReadOnlyCollection<Category> categories)
-        {
-            var duplicate = categories
-                .GroupBy(c => c)
-                .FirstOrDefault(g => g.Count() > 1);
-
-            if (duplicate != null)
-                throw new MenuException($"Categoria repetida: {duplicate.Key}");
+            _categories = [.. new HashSet<Category>(categories)];
+            EnsureValidState(categories);
         }
 
         public void Add(Category category)
         {
-            var projected = new List<Category>(_categories) { category };
-            ValidateCategories(projected);
+            FailIfCategoryAlreadyExists(category);
 
+            var projected = new HashSet<Category>(_categories) { category };
+            EnsureValidState(projected);
             _categories.Add(category);
         }
 
         public void Remove(Category category)
         {
-            var projected = new List<Category>(_categories);
+            FailIfCategoryNotFound(category);
+
+            var projected = new HashSet<Category>(_categories);
             projected.Remove(category);
             
-            ValidateCategories(projected);
-            
+            EnsureValidState(projected);
             _categories.Remove(category);
+        }
+
+        private static void EnsureValidState(IEnumerable<Category> categories)
+        {
+            EnsureAtLeastOne(categories);
+        }
+
+        private static void EnsureAtLeastOne(IEnumerable<Category> categories)
+        {
+            ArgumentNullException.ThrowIfNull(categories);
+
+            MenuException.ThrowIf(
+                !categories.Any(),
+                "O item do menu precisa possuir ao menos uma categoria."
+            );
+        }
+
+        private void FailIfCategoryAlreadyExists(Category category)
+        {
+            MenuException.ThrowIf(
+                _categories.Contains(category),
+                "Categoria já existente no item do menu."
+            );
+        }
+
+        private void FailIfCategoryNotFound(Category category)
+        {
+            MenuException.ThrowIf(
+                !_categories.Contains(category),
+                "Categoria não encontrada no item do menu."
+            );
         }
 
         public bool Contains(Category category) => _categories.Contains(category);

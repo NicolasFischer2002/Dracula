@@ -5,100 +5,118 @@ namespace Menu.Domain.EntityComposition
 {
     public sealed class MenuItemImages
     {
-        private readonly List<MenuItemImage> _itemImages;
+        private readonly HashSet<MenuItemImage> _itemImages;
         public IReadOnlyCollection<MenuItemImage> ItemImages => _itemImages.AsReadOnly();
         private const int MaximumNumberOfImages = 3;
 
         public MenuItemImages(IEnumerable<MenuItemImage> itemImages)
         {
-            ArgumentNullException.ThrowIfNull(itemImages, nameof(itemImages));
-
-            _itemImages = new List<MenuItemImage>(itemImages);
-
-            ValidateItemImages(_itemImages);
+            MenuException.ThrowIfNull(itemImages, nameof(itemImages));
+            _itemImages = [.. new HashSet<MenuItemImage>(itemImages)];
+            EnsureValidState(_itemImages);
         }
 
-        private void ValidateItemImages(IReadOnlyCollection<MenuItemImage> images)
+        private void EnsureValidState(IReadOnlyCollection<MenuItemImage> images)
         {
+            MenuException.ThrowIfNull(images, nameof(images));
+
             EnsureImageCountWithinLimit(images);
             EnsureHasPrimaryImage(images);
             EnsureSinglePrimaryImage(images);
             EnsureThatTheImagesHaveUniqueUrls(images);
         }
 
-        private void EnsureImageCountWithinLimit(IReadOnlyCollection<MenuItemImage> images)
+        private static void EnsureImageCountWithinLimit(IReadOnlyCollection<MenuItemImage> images)
         {
-            if (images.Count > MaximumNumberOfImages)
-            {
-                throw new MenuException(
-                    $"O número máximo permitido de imagens por item do menu é de {MaximumNumberOfImages}.",
-                    images.Count().ToString()
-                );
-            }
+            MenuException.ThrowIf(
+                images.Count > MaximumNumberOfImages,
+                $"O número máximo permitido de imagens por item do menu é de {MaximumNumberOfImages}."
+            );
         }
 
-        private void EnsureHasPrimaryImage(IReadOnlyCollection<MenuItemImage> images)
+        private static void EnsureHasPrimaryImage(IReadOnlyCollection<MenuItemImage> images)
         {
-            if (!images.Any(ii => ii.IsPrimary))
-            {
-                throw new MenuException("Uma imagem deve ser marcada como principal para este item do menu.");
-            }
+            MenuException.ThrowIf(
+                !images.Any(ii => ii.IsPrimary),
+                "Uma imagem deve ser marcada como principal para este item do menu."
+            );
         }
 
-        private void EnsureSinglePrimaryImage(IReadOnlyCollection<MenuItemImage> images)
+        private static void EnsureSinglePrimaryImage(IReadOnlyCollection<MenuItemImage> images)
         {
             const int MaximumNumberOfPrimaryImages = 1;
-
             var primaryCount = images.Count(ii => ii.IsPrimary);
-            if (primaryCount > MaximumNumberOfPrimaryImages)
-            {
-                throw new MenuException(
-                    "Apenas uma imagem pode estar marcada como principal por item do menu.",
-                    primaryCount.ToString()
-                );
-            }
+            
+            MenuException.ThrowIf(
+                primaryCount > MaximumNumberOfPrimaryImages,
+                "Apenas uma imagem pode estar marcada como principal por item do menu."
+            );
         }
 
-        private void EnsureThatTheImagesHaveUniqueUrls(IReadOnlyCollection<MenuItemImage> images)
+        private static void EnsureThatTheImagesHaveUniqueUrls(IReadOnlyCollection<MenuItemImage> images)
         {
-            List<Uri>? repeatedImagesOfMenuItems = images
+            var duplicates = images
                 .GroupBy(ii => ii.Url)
                 .Where(g => g.Count() > 1)
                 .Select(g => g.Key)
                 .ToList();
 
-            if (repeatedImagesOfMenuItems.Any())
-            {
-                var duplicatedUrls = string.Join(", ", repeatedImagesOfMenuItems);
-                throw new MenuException($"As imagens adicionadas ao item do menu estão repetidas: {duplicatedUrls}");
-            }
+            MenuException.ThrowIf(
+                duplicates.Any(),
+                $"As imagens adicionadas ao item do menu estão repetidas: {string.Join(", ", duplicates)}"
+            );
         }
 
-        public void SetPrimaryImage(MenuItemImage newImage)
+        public void SetPrimaryImage(MenuItemImage newPrimaryImage)
         {
-            ArgumentNullException.ThrowIfNull(newImage, nameof(newImage));
+            MenuException.ThrowIfNull(newPrimaryImage, nameof(newPrimaryImage));
 
-            var projectedImages = _itemImages
-                    .Where(ii => !ii.IsPrimary)
-                    .ToList();
+            if (!newPrimaryImage.IsPrimary)
+            {
+                newPrimaryImage.MarkAsPrimary();
+            }
 
-            projectedImages.Add(newImage);
+            FailIfImageNotFound(newPrimaryImage);
 
-            ValidateItemImages(projectedImages);
+            var projected = _itemImages
+                .Where(ii => !ii.IsPrimary)
+                .Append(newPrimaryImage)
+                .ToHashSet();
+
+            EnsureValidState(projected);
 
             _itemImages.Clear();
-            _itemImages.AddRange(projectedImages);
+            _itemImages.UnionWith(projected);
         }
 
         public void RemoveImageByUrl(Uri imageUrl)
         {
-            ArgumentNullException.ThrowIfNull(imageUrl, nameof(imageUrl));
+            MenuException.ThrowIfNull(imageUrl, nameof(imageUrl));
+            FailIfImageNotFound(imageUrl);
 
-            var newImages = _itemImages.Where(ii => ii.Url != imageUrl).ToList();
-            ValidateItemImages(newImages);
+            var projected = _itemImages
+                .Where(ii => !ii.Url.Equals(imageUrl))
+                .ToHashSet();
 
+            EnsureValidState(projected);
             _itemImages.Clear();
-            _itemImages.AddRange(newImages);
+            _itemImages.UnionWith(projected);
+        }
+
+        private void FailIfImageNotFound(MenuItemImage image)
+        {
+            MenuException.ThrowIf(
+                !_itemImages.Contains(image), 
+                "Imagem não encontrada no item."
+            );
+        }
+
+        private void FailIfImageNotFound(Uri imageUrl)
+        {
+            MenuException.ThrowIf(
+                _itemImages.FirstOrDefault(ii => ii.Url == imageUrl) is null,
+                "Imagem não encontrada no item."
+            );
         }
     }
 }

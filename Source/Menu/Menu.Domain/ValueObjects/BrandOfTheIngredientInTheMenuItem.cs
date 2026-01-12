@@ -19,21 +19,17 @@ namespace Menu.Domain.ValueObjects
             const int MinimumLength = 0;
             const int MaximumLength = 100;
 
-            if (Brand.Length < MinimumLength)
-            {
-                throw new MenuException(
-                    $"A marca do item do menu não pode possuir menos de {MinimumLength} caracteres.", 
-                    Brand
-                );
-            }
+            MenuException.ThrowIf(
+                Brand.Length < MinimumLength,
+                Brand,
+                $"A marca do item do menu não pode possuir menos de {MinimumLength} caracteres."
+            );
 
-            if (Brand.Length > MaximumLength)
-            {
-                throw new MenuException(
-                    $"A marca do item do menu não pode possuir mais de {MaximumLength} caracteres.",
-                    Brand
-                );
-            }
+            MenuException.ThrowIf(
+                Brand.Length > MaximumLength,
+                Brand,
+                $"A marca do item do menu não pode possuir mais de {MaximumLength} caracteres."
+            );
         }
 
         public static BrandOfTheIngredientInTheMenuItem Empty =>

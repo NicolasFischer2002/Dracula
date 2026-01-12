@@ -6,7 +6,7 @@ namespace Ordering.Domain.ValueObjects
     /// <summary>
     /// Represents the identifier of an order, acting as the order's table or ticket.
     /// </summary>
-    public record Identifier
+    public sealed record Identifier
     {
         public string Id { get; }
 
@@ -18,23 +18,21 @@ namespace Ordering.Domain.ValueObjects
 
         private void ValidateIdentifier()
         {
-            const int maxLength = 50;
+            const int MaximumLength = 50;
 
-            if (string.IsNullOrWhiteSpace(Id))
-            {
-                throw new OrderException(
-                    $"O identificador do pedido não estar vazio.",
-                    nameof(Id)
-                );
-            }
+            OrderException.ThrowIf(
+                string.IsNullOrWhiteSpace(Id),
+                Id,
+                "O identificador do pedido não pode estar vazio."
+            );
 
-            if (Id.Length > maxLength)
-            {
-                throw new OrderException(
-                    $"O identificador do pedido não pode possuir um comprimento maior que {maxLength} caracteres.",
-                    nameof(Id)
-                );
-            }
+            OrderException.ThrowIf(
+                Id.Length > MaximumLength,
+                Id,
+                $"O identificador do pedido não pode exceder {MaximumLength} caracteres."
+            );
         }
+
+        public override string ToString() => Id;
     }
 }

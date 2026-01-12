@@ -1,4 +1,5 @@
 ﻿using Ordering.Domain.Exceptions;
+using SharedKernel.Formatters;
 
 namespace Ordering.Domain.ValueObjects
 {
@@ -8,27 +9,25 @@ namespace Ordering.Domain.ValueObjects
 
         public OrderItemName(string value)
         {
-            Value = value.Trim();
-
+            Value = StringNormalizer.Normalize(value);
             ValidateName();
         }
 
         private void ValidateName()
         {
-            if (string.IsNullOrWhiteSpace(Value))
-            {
-                throw new OrderException("O nome do item do pedido não estar vazio.");
-            }
+            OrderException.ThrowIf(
+                string.IsNullOrWhiteSpace(Value),
+                Value,
+                "O nome do item do pedido não pode estar vazio."
+            );
 
-            const int maxLength = 150;
+            const int MaximumLength = 150;
 
-            if (Value.Length > maxLength)
-            {
-                throw new OrderException(
-                    $"O nome do item do pedido excede a quantidade máxima de {maxLength} caracteres.",
-                    Value
-                );
-            }
+            OrderException.ThrowIf(
+                Value.Length > MaximumLength,
+                Value,
+                $"O nome do item do pedido não pode exceder {MaximumLength} caracteres."
+            );
         }
 
         public override string ToString() => Value;

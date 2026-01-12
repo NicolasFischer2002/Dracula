@@ -8,7 +8,6 @@ namespace Ordering.Domain.EntityComposition
     public sealed class OrderTimeline
     {
         private readonly SortedDictionary<DateTime, ActionTimelineOfTheOrder> _events;
-
         public IReadOnlyDictionary<DateTime, ActionTimelineOfTheOrder> Events =>
             new ReadOnlyDictionary<DateTime, ActionTimelineOfTheOrder>(_events);
 
@@ -16,26 +15,34 @@ namespace Ordering.Domain.EntityComposition
 
         public OrderTimeline(UtcInstant orderCreationMoment)
         {
+            OrderException.ThrowIfNull(orderCreationMoment, nameof(orderCreationMoment));
+
+            var creationTime = orderCreationMoment.Value;
             _events = new SortedDictionary<DateTime, ActionTimelineOfTheOrder>
             {
-                [orderCreationMoment.Value] = ActionTimelineOfTheOrder.OrderCreated
+                [creationTime] = ActionTimelineOfTheOrder.OrderCreated
             };
-
-            LastUpdated = orderCreationMoment.Value;
+            LastUpdated = creationTime;
         }
 
         public void AddEvent(UtcInstant eventTime, ActionTimelineOfTheOrder action)
         {
-            var moment = eventTime.Value;
+            OrderException.ThrowIfNull(eventTime, nameof(eventTime));
 
-            if (_events.ContainsKey(moment))
-                throw new OrderException(
-                    "Já existe um evento registrado para este instante.",
-                    moment.ToString()
-                );
+            var eventTimestamp = eventTime.Value;
+            FailIfEventTimestampAlreadyExists(eventTimestamp);
 
-            _events.Add(moment, action);
-            LastUpdated = moment;
+            _events.Add(eventTimestamp, action);
+            LastUpdated = eventTimestamp;
+        }
+
+        private void FailIfEventTimestampAlreadyExists(DateTime eventTimestamp)
+        {
+            OrderException.ThrowIf(
+                _events.ContainsKey(eventTimestamp),
+                eventTimestamp.ToString(),
+                "Já existe um evento registrado para este timestamp."
+            );
         }
     }
 }
