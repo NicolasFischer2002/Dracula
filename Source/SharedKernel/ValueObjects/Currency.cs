@@ -14,19 +14,25 @@ namespace SharedKernel.ValueObjects
         {
             Code = StringNormalizer.Normalize(code);
 
-            ValidateCurrency();
+            ValidateCurrency(Code);
         }
 
-        private void ValidateCurrency()
+        private static void ValidateCurrency(string code)
         {
-            if (string.IsNullOrWhiteSpace(Code))
-                throw new InvalidCurrencyException(Code);
+            InvalidCurrencyException.ThrowIf(
+                string.IsNullOrWhiteSpace(code),
+                "A moeda não pode ser nula."
+            );
 
-            var normalized = Code.Trim().ToUpperInvariant();
+            var normalized = GetNormalizedCode(code);
 
-            if (!ValidCurrencies.Contains(normalized))
-                throw new InvalidCurrencyException(normalized);
+            InvalidCurrencyException.ThrowIf(
+                !ValidCurrencies.Contains(normalized),
+                $"A moeda informada '{normalized}' não é válida."
+            );
         }
+
+        private static string GetNormalizedCode(string code) => code.Trim().ToUpperInvariant();
 
         public static Currency BRL => new("BRL");
         public static Currency USD => new("USD");

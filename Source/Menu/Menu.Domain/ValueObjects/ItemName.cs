@@ -9,7 +9,6 @@ namespace Menu.Domain.ValueObjects
 
         public ItemName(string name)
         {
-            MenuException.ThrowIfNull(name, nameof(name));
             Name = StringNormalizer.Normalize(name);
             ValidateName();
         }

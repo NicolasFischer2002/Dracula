@@ -40,7 +40,7 @@ namespace Ordering.Domain.Entities
 
         public void AddDiscountToOrder(Money discount)
         {
-            OrderException.ThrowIfNull(discount, nameof(discount));
+            OrderException.ThrowIfNull(discount, "O dinheiro não pode estar nulo ao aplicar o desconto no pedido.");
 
             FailIfDifferentCurrency(discount);
             FailIfNegativeDiscount(discount);

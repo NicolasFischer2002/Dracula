@@ -10,7 +10,7 @@ namespace Menu.Domain.Entities
 
         public Menu(Guid id, IEnumerable<MenuItem> menuItems)
         {
-            ArgumentNullException.ThrowIfNull(menuItems, nameof(menuItems));
+            MenuException.ThrowIfNull(menuItems, "Os itens do menu não podem ser nulos.");
 
             Id = id;
             _menuItems = [.. menuItems];
@@ -18,14 +18,14 @@ namespace Menu.Domain.Entities
 
         public void AddMenuItem(MenuItem menuItem)
         {
-            ArgumentNullException.ThrowIfNull(menuItem);
+            MenuException.ThrowIfNull(menuItem, "Adição de um item no menu: valor nulo identificado.");
             FailIfItemAlreadyExists(menuItem);
             _menuItems.Add(menuItem);
         }
 
         public void RemoveMenuItem(MenuItem menuItem)
         {
-            ArgumentNullException.ThrowIfNull(menuItem);
+            MenuException.ThrowIfNull(menuItem, "Remoção de um item do menu: valor nulo identificado.");
             FailIfItemNotFound(menuItem);
             _menuItems.Remove(menuItem);
         }

@@ -10,7 +10,7 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemIngredients(IEnumerable<MenuItemIngredient> ingredients)
         {
-            MenuException.ThrowIfNull(ingredients, nameof(ingredients));
+            MenuException.ThrowIfNull(ingredients, "Os ingredientes do menu não podem ser nulos.");
 
             _ingredients = [.. new HashSet<MenuItemIngredient>(ingredients)];
 
@@ -19,7 +19,7 @@ namespace Menu.Domain.EntityComposition
 
         private void ValidateMenuIngredients(IEnumerable<MenuItemIngredient> items)
         {
-            MenuException.ThrowIfNull(items, nameof(items));
+            MenuException.ThrowIfNull(items, "Os ingredientes do menu não podem ser nulos.");
             EnsureMinimumSizeQuantityOfIngredients(items);
         }
 
@@ -33,7 +33,7 @@ namespace Menu.Domain.EntityComposition
 
         private void FailIfMenuItemIngredientAlreadyExists(MenuItemIngredient item)
         {
-            MenuException.ThrowIfNull(item, nameof(item));
+            MenuException.ThrowIfNull(item, "O ingrediente do item do menu não pode ser nulo.");
 
             MenuException.ThrowIf(
                 _ingredients.Contains(item),
@@ -43,7 +43,6 @@ namespace Menu.Domain.EntityComposition
 
         public void Add(MenuItemIngredient ingredient)
         {
-            ArgumentNullException.ThrowIfNull(ingredient, nameof(ingredient));
             FailIfMenuItemIngredientAlreadyExists(ingredient);
 
             var projected = _ingredients.Concat([ingredient]).ToList();
