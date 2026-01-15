@@ -9,7 +9,7 @@ namespace Ordering.Domain.ValueObjects
 
         public GrossOrderItemValue(Money value)
         {
-            OrderException.ThrowIfNull(value, nameof(value));
+            OrderException.ThrowIfNull(value, "O valor bruto do item do pedido não pode ser nulo.");
             Value = value;
             ValidateGrossValue();
         }

@@ -1,4 +1,5 @@
-﻿using SharedKernel.ValueObjects;
+﻿using SharedKernel.Formatters;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Application.Commands.PlaceOrder
 {
@@ -9,7 +10,7 @@ namespace Ordering.Application.Commands.PlaceOrder
 
         public CreateOrderRequest(string identifier, Currency currency)
         {
-            Identifier = identifier;
+            Identifier = StringNormalizer.Normalize(identifier);
             Currency = currency;
         }
     }

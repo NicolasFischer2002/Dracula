@@ -10,8 +10,8 @@ namespace Ordering.Domain.ValueObjects
 
         public OrderItemDiscount(Money value, Money orderItemValue)
         {
-            OrderException.ThrowIfNull(value, nameof(value));
-            OrderException.ThrowIfNull(orderItemValue, nameof(orderItemValue));
+            OrderException.ThrowIfNull(value, "O valor do desconto do item do pedido não pode ser nulo.");
+            OrderException.ThrowIfNull(orderItemValue, "O valor do item do pedido não pode ser nulo.");
 
             Value = value;
             OrderItemValue = orderItemValue;
