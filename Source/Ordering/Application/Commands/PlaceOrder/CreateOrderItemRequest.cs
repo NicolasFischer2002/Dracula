@@ -1,4 +1,5 @@
-﻿using SharedKernel.ValueObjects;
+﻿using SharedKernel.Formatters;
+using SharedKernel.ValueObjects;
 
 namespace Ordering.Application.Commands.PlaceOrder
 {
@@ -14,7 +15,7 @@ namespace Ordering.Application.Commands.PlaceOrder
             string cookingInstructions)
         {
             WaiterId = waiterId;
-            NameItem = nameItem;
+            NameItem = StringNormalizer.Normalize(nameItem);
             GrossValue = grossValue;
             Discount = discount;
             CookingInstructions = cookingInstructions;

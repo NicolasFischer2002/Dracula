@@ -8,8 +8,11 @@ namespace SharedKernel.ValueObjects
 
         public UtcInstant(DateTime value)
         {
-            if (value.Kind != DateTimeKind.Utc)
-                throw new InvalidUtcInstantException(value);
+            InvalidUtcInstantException.ThrowIf(
+                value.Kind != DateTimeKind.Utc,
+                value,
+                "UtcInstant aceita apenas DateTime no fuso UTC (Kind.Utc)."
+            );
 
             Value = value;
         }

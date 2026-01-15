@@ -15,7 +15,10 @@ namespace Ordering.Domain.EntityComposition
 
         public OrderTimeline(UtcInstant orderCreationMoment)
         {
-            OrderException.ThrowIfNull(orderCreationMoment, nameof(orderCreationMoment));
+            OrderException.ThrowIfNull(
+                orderCreationMoment, 
+                "O momento de criação da linha do tempo do pedido não pode ser nulo"
+            );
 
             var creationTime = orderCreationMoment.Value;
             _events = new SortedDictionary<DateTime, ActionTimelineOfTheOrder>
@@ -27,7 +30,10 @@ namespace Ordering.Domain.EntityComposition
 
         public void AddEvent(UtcInstant eventTime, ActionTimelineOfTheOrder action)
         {
-            OrderException.ThrowIfNull(eventTime, nameof(eventTime));
+            OrderException.ThrowIfNull(
+                eventTime, 
+                "Não é possível adicionar um evento nulo na linha do tempo do pedido."
+            );
 
             var eventTimestamp = eventTime.Value;
             FailIfEventTimestampAlreadyExists(eventTimestamp);

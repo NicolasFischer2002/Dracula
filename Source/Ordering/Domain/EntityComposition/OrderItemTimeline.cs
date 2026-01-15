@@ -13,7 +13,10 @@ public sealed class OrderItemTimeline
 
     public OrderItemTimeline(UtcInstant orderCreationMoment)
     {
-        OrderException.ThrowIfNull(orderCreationMoment, nameof(orderCreationMoment));
+        OrderException.ThrowIfNull(
+            orderCreationMoment, 
+            "O momento de criação da linha do tempo do item do pedido não pode ser nulo"
+        );
 
         var creationTime = orderCreationMoment.Value;
         _events = new SortedDictionary<DateTime, ActionTimelineOfTheOrderItem>
@@ -25,7 +28,10 @@ public sealed class OrderItemTimeline
 
     public void AddEvent(UtcInstant eventTime, ActionTimelineOfTheOrderItem action)
     {
-        OrderException.ThrowIfNull(eventTime, nameof(eventTime));
+        OrderException.ThrowIfNull(
+            eventTime, 
+            "Não é possível adicionar um evento nulo na linha do tempo do item do pedido."
+        );
 
         var eventTimestamp = eventTime.Value;
         FailIfEventTimestampAlreadyExists(eventTimestamp);

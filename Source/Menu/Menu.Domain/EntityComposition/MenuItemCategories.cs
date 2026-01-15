@@ -10,7 +10,7 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemCategories(IEnumerable<Category> categories)
         {
-            ArgumentNullException.ThrowIfNull(categories, nameof(categories));
+            MenuException.ThrowIfNull(categories, "As categorias do menu não podem ser nulas.");
 
             _categories = [.. new HashSet<Category>(categories)];
             EnsureValidState(categories);
@@ -38,13 +38,12 @@ namespace Menu.Domain.EntityComposition
 
         private static void EnsureValidState(IEnumerable<Category> categories)
         {
+            MenuException.ThrowIfNull(categories, "As categorias do menu não podem ser nulas.");
             EnsureAtLeastOne(categories);
         }
 
         private static void EnsureAtLeastOne(IEnumerable<Category> categories)
         {
-            ArgumentNullException.ThrowIfNull(categories);
-
             MenuException.ThrowIf(
                 !categories.Any(),
                 "O item do menu precisa possuir ao menos uma categoria."

@@ -9,12 +9,13 @@ namespace SharedKernel.ValueObjects
 
         public Money(decimal amount, Currency currency)
         {
-            Currency = currency ?? throw new InvalidMoneyException(
-                "A moeda não pode ser nula.",
-                amount
+            InvalidMoneyException.ThrowIfNull(
+                currency,
+                "A moeda não pode ser nula."
             );
 
             Amount = Normalize(amount);
+            Currency = currency;
 
             Validate();
         }
@@ -45,13 +46,11 @@ namespace SharedKernel.ValueObjects
 
         private void Validate()
         {
-            if (Amount < 0)
-            {
-                throw new InvalidMoneyException(
-                    "O valor monetário não pode ser negativo.",
-                    Amount
-                );
-            }
+            InvalidMoneyException.ThrowIf(
+                Amount < 0,
+                Amount,
+                "O valor monetário não pode ser negativo."
+            );
         }
 
         public static Money Zero(Currency currency) =>
@@ -62,23 +61,37 @@ namespace SharedKernel.ValueObjects
 
         public Money Add(Money other)
         {
+            FailIfTheMoneyIsNull(other);
+
             EnsureSameCurrency(other);
             return new Money(Amount + other.Amount, Currency);
         }
 
         public Money Subtract(Money other)
         {
+            FailIfTheMoneyIsNull(other);
+
             EnsureSameCurrency(other);
             return new Money(Amount - other.Amount, Currency);
         }
 
         private void EnsureSameCurrency(Money other)
         {
-            if (Currency != other.Currency)
-                throw new InvalidMoneyException(
-                    "Não é possível operar valores com moedas diferentes.",
-                    Amount
-                );
+            FailIfTheMoneyIsNull(other);
+
+            InvalidMoneyException.ThrowIf(
+                !SameCurrency(this, other),
+                Amount,
+                "Não é possível operar valores com moedas diferentes."
+            );
+        }
+
+        private static void FailIfTheMoneyIsNull(Money money)
+        {
+            InvalidMoneyException.ThrowIfNull(
+                money,
+                "O valor monetário fornecido não pode ser nulo."
+            );
         }
 
         public static bool SameCurrency(Money money_1, Money money_2) => money_1.Currency == money_2.Currency;

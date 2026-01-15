@@ -18,14 +18,14 @@ namespace Ordering.Domain.EntityComposition
 
         public OrderItems(IEnumerable<OrderItem> items)
         {
-            OrderException.ThrowIfNull(items, nameof(items));
+            OrderException.ThrowIfNull(items, "Os itens do pedido não podem ser nulos.");
             _items = [.. items];
             EnsureValidState(_items);
         }
 
         public void Add(OrderItem orderItem)
         {
-            OrderException.ThrowIfNull(orderItem, nameof(orderItem));
+            OrderException.ThrowIfNull(orderItem, "O item que será adicionado ao pedido não pode ser nulo.");
             _items.Add(orderItem);
         }
 
@@ -61,7 +61,7 @@ namespace Ordering.Domain.EntityComposition
 
         private static void EnsureValidState(IReadOnlyCollection<OrderItem> items)
         {
-            OrderException.ThrowIfNull(items, nameof(items));
+            OrderException.ThrowIfNull(items, "Os items do pedido não podem ser nulos.");
 
             EnsureMinimumQuantityOfItems(items);
             EnsureAllItemsHaveSameCurrency(items);

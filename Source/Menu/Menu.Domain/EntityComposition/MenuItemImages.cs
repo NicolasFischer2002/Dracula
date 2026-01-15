@@ -11,14 +11,14 @@ namespace Menu.Domain.EntityComposition
 
         public MenuItemImages(IEnumerable<MenuItemImage> itemImages)
         {
-            MenuException.ThrowIfNull(itemImages, nameof(itemImages));
+            MenuException.ThrowIfNull(itemImages, "As imagens do item do menu não podem ser nulas.");
             _itemImages = [.. new HashSet<MenuItemImage>(itemImages)];
             EnsureValidState(_itemImages);
         }
 
         private void EnsureValidState(IReadOnlyCollection<MenuItemImage> images)
         {
-            MenuException.ThrowIfNull(images, nameof(images));
+            MenuException.ThrowIfNull(images, "As imagens do item do menu não podem ser nulas.");
 
             EnsureImageCountWithinLimit(images);
             EnsureHasPrimaryImage(images);
@@ -69,7 +69,7 @@ namespace Menu.Domain.EntityComposition
 
         public void SetPrimaryImage(MenuItemImage newPrimaryImage)
         {
-            MenuException.ThrowIfNull(newPrimaryImage, nameof(newPrimaryImage));
+            MenuException.ThrowIfNull(newPrimaryImage, "A imagem primária do item do menu não pode ser nula.");
 
             if (!newPrimaryImage.IsPrimary)
             {
@@ -91,7 +91,7 @@ namespace Menu.Domain.EntityComposition
 
         public void RemoveImageByUrl(Uri imageUrl)
         {
-            MenuException.ThrowIfNull(imageUrl, nameof(imageUrl));
+            MenuException.ThrowIfNull(imageUrl, "A imagem que deveria ser removida não pode ser nula.");
             FailIfImageNotFound(imageUrl);
 
             var projected = _itemImages

@@ -1,4 +1,6 @@
-﻿namespace Menu.Domain.Entities
+﻿using SharedKernel.Formatters;
+
+namespace Menu.Domain.Entities
 {
     public sealed class MenuItemImage
     {
@@ -11,7 +13,7 @@
         {
             Id = id;
             Url = url;
-            ContentType = contentType;
+            ContentType = StringNormalizer.Normalize(contentType);
             IsPrimary = isPrimary;
         }
 

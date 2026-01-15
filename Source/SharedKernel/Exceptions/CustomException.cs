@@ -19,36 +19,5 @@
         {
             InvalidValue = invalidValue;
         }
-
-        public static void ThrowIf(bool condition, T invalidValue, string message)
-        {
-            if (condition)
-                throw Create(message, invalidValue);
-        }
-
-        public static void ThrowIf(bool condition, string message)
-        {
-            if (condition)
-                throw Create(message, default!);
-        }
-
-        public static void ThrowIfNull<TValue>(TValue? value, string message)
-        where TValue : class
-        {
-            if (value is null)
-                throw Create(message, default(T)!);
-        }
-
-        public static void ThrowIfNull<TValue>(TValue? value, T invalidValue, string message)
-            where TValue : class
-        {
-            if (value is null)
-                throw Create(message, invalidValue);
-        }
-
-        protected static CustomException<T> Create(string message, T invalidValue)
-        {
-            throw new NotImplementedException("Subclasses devem implementar Create");
-        }
     }
 }
