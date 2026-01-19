@@ -8,7 +8,7 @@ namespace Menu.Domain.Entities
     {
         public Guid Id { get; }
         public Guid IngredientId { get; }
-        public IngredientName IngredientName { get; private set; }
+        public IngredientName Name { get; private set; }
         public MenuItemQuantity Quantity { get; }
         public bool IsOptional { get; private set; }
         public BrandOfTheIngredientInTheMenuItem Brand { get; private set; }
@@ -19,13 +19,13 @@ namespace Menu.Domain.Entities
         /// </summary>
         public Money AdditionalPrice { get; private set; }
 
-        public MenuItemIngredient(Guid id, Guid ingredientId, IngredientName ingredientName, 
+        public MenuItemIngredient(Guid id, Guid ingredientId, IngredientName name, 
             MenuItemQuantity quantity, bool isOptional, BrandOfTheIngredientInTheMenuItem? brandSnapshot, 
             Money additionalPrice)
         {
             Id = id;
             IngredientId = ingredientId;
-            IngredientName = ingredientName;
+            Name = name;
             Quantity = quantity;
             IsOptional = isOptional;
 

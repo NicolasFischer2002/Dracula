@@ -1,5 +1,5 @@
 ﻿using Ordering.Application.Commands.PlaceOrder;
-using Ordering.Domain.Entities;
+using Ordering.Domain. Entities;
 using Ordering.Domain.EntityComposition;
 using Ordering.Domain.Enums;
 using Ordering.Domain.ValueObjects;

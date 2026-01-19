@@ -15,11 +15,11 @@
     <Project Path="Source/Menu/Menu.Tests/Menu.Tests.csproj" Id="6747f4d8-b12c-4292-ae64-bd4593737040" />
   </Folder>
   <Folder Name="/Source/Ordering/">
-    <Project Path="Source/Ordering/Api/Ordering.Api.csproj" />
-    <Project Path="Source/Ordering/Application/Ordering.Application.csproj" />
-    <Project Path="Source/Ordering/Domain/Ordering.Domain.csproj" />
-    <Project Path="Source/Ordering/Infrastructure/Ordering.Infrastructure.csproj" />
-    <Project Path="Source/Ordering/Tests/Ordering.Tests.csproj" />
+    <Project Path="Source/Ordering/Ordering.Api/Ordering.Api.csproj" />
+    <Project Path="Source/Ordering/Ordering.Application/Ordering.Application.csproj" />
+    <Project Path="Source/Ordering/Ordering.Domain/Ordering.Domain.csproj" />
+    <Project Path="Source/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj" />
+    <Project Path="Source/Ordering/Ordering.Tests/Ordering.Tests.csproj" />
   </Folder>
   <Folder Name="/Source/SharedKernel/">
     <Project Path="Source/SharedKernel/SharedKernel.csproj" />
